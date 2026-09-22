@@ -92,7 +92,12 @@
       if (exifOrientation(bytes) <= 1) return doc.embedJpg(bytes);
     }
     if (t === "image/png") return doc.embedPng(new Uint8Array(await it.file.arrayBuffer()));
-    // Otros formatos (WebP, GIF, HEIC en Safari…) se pasan a JPG
+    // Fotos HEIC del iPhone
+    if (P.isHeic(it.file)) {
+      const jpg = await P.heicToJpeg(it.file);
+      return doc.embedJpg(new Uint8Array(await jpg.arrayBuffer()));
+    }
+    // Otros formatos (WebP, GIF…) se pasan a JPG
     const img = await loadImg(it.url);
     const c = document.createElement("canvas");
     c.width = img.naturalWidth; c.height = img.naturalHeight;

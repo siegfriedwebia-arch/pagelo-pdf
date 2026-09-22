@@ -14,12 +14,13 @@ Solo pagas el dominio.
 
 ```
 index.html                  Portada con buscador
-unir-pdf.html               dividir-pdf.html        rotar-pdf.html
-eliminar-paginas.html       extraer-paginas.html    comprimir-pdf.html
-pdf-a-word.html             word-a-pdf.html         jpg-a-pdf.html
-pdf-a-jpg.html              firmar-pdf.html         proteger-pdf.html
-desbloquear-pdf.html        marca-de-agua.html
-convertir-imagenes.html     comprimir-imagenes.html redimensionar-imagenes.html
+Organizar:  unir-pdf · dividir-pdf · organizar-pdf · rotar-pdf · eliminar-paginas ·
+            extraer-paginas · numerar-paginas
+Optimizar:  comprimir-pdf · escanear-documentos · ocr-pdf
+Convertir:  pdf-a-word · word-a-pdf · excel-a-pdf · jpg-a-pdf · pdf-a-jpg
+Editar:     editar-pdf · rellenar-formulario-pdf · firmar-pdf · tachar-datos-pdf ·
+            marca-de-agua · proteger-pdf · desbloquear-pdf
+Imágenes:   heic-a-jpg · convertir-imagenes · comprimir-imagenes · redimensionar-imagenes
 contacto.html · privacidad.html · aviso-legal.html · 404.html · sitemap.xml · robots.txt
 
 assets/css/style.css        Estilos (colores y tipografías al principio, en :root)
@@ -80,9 +81,17 @@ Da de alta también la web en **Google Search Console** y envía `sitemap.xml`.
 - **Proteger PDF**: cifrado AES-256. **Desbloquear**: requiere saber la contraseña
   (o quita restricciones de PDF que se abren sin contraseña).
 - **Firmar PDF**: firma manuscrita como imagen, no firma con certificado digital.
+- **OCR**: reconoce texto impreso en español (no letra a mano). Necesita abrirse desde
+  un servidor (Live Server o la web publicada); abriendo el HTML con doble clic no funciona.
+  La primera vez descarga unos 5 MB (queda guardado en el navegador).
+- **Tachar datos**: las páginas tachadas se guardan como imagen para que el texto se borre
+  de verdad. La búsqueda automática solo encuentra texto real (no en escaneos).
+- **Rellenar formularios**: no admite formularios XFA (algunos oficiales de Adobe).
+- **Escanear**: detecta el papel si se fotografía sobre un fondo más oscuro.
 
 ## 7. Licencias de las librerías incluidas
 
 Todas permiten uso comercial gratuito:
 pdf-lib (@cantoo/pdf-lib) — MIT · pdf.js — Apache 2.0 · docx — MIT · mammoth — BSD-2 ·
-pdfmake — MIT · html-to-pdfmake — MIT · JSZip — MIT.
+pdfmake — MIT · html-to-pdfmake — MIT · JSZip — MIT · Tesseract.js — Apache 2.0 ·
+SheetJS (xlsx) — Apache 2.0 · heic-to — LGPL-3.0 (se usa sin modificar, como archivo aparte).

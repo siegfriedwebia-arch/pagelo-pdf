@@ -42,7 +42,8 @@
       li.querySelector("b").textContent = f.name;
       const im = li.querySelector("img");
       im.onload = () => { const sp = li.querySelector(".meta span"); if (!sp.dataset.done) sp.textContent += ` · ${im.naturalWidth}×${im.naturalHeight}`; };
-      im.src = URL.createObjectURL(f);
+      if (isHeic(f)) decodable(f).then(b => { im.src = URL.createObjectURL(b); }).catch(() => {});
+      else im.src = URL.createObjectURL(f);
       li.dataset.index = i;
       list.appendChild(li);
     });
@@ -74,12 +75,22 @@
   const pctIn = U.$("#percent");
   if (pctIn) pctIn.addEventListener("input", () => { U.$("#percent-out").textContent = pctIn.value + "%"; });
 
-  function loadImage(file) {
-    return new Promise((resolve, reject) => {
+  const isHeic = f => /image\/hei[cf]/i.test(f.type) || /\.hei[cf]$/i.test(f.name);
+
+  // Fotos HEIC del iPhone: se convierten primero (la mayoría de navegadores no las abren)
+  async function decodable(file) {
+    if (!isHeic(file)) return file;
+    await U.loadScript("assets/vendor/heic-to.js");
+    return await HeicTo({ blob: file, type: "image/png" });
+  }
+
+  async function loadImage(file) {
+    const src = await decodable(file);
+    return await new Promise((resolve, reject) => {
       const img = new Image();
       img.onload = () => resolve(img);
       img.onerror = reject;
-      img.src = URL.createObjectURL(file);
+      img.src = URL.createObjectURL(src);
     });
   }
 

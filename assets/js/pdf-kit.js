@@ -12,8 +12,31 @@
     zip: [V + "jszip.min.js"],
     docx: [V + "docx.min.js"],
     mammoth: [V + "mammoth.browser.min.js"],
-    pdfmake: [V + "pdfmake.min.js", V + "vfs_fonts.js", V + "html-to-pdfmake.min.js"]
+    pdfmake: [V + "pdfmake.min.js", V + "vfs_fonts.js", V + "html-to-pdfmake.min.js"],
+    pdfmakeOnly: [V + "pdfmake.min.js", V + "vfs_fonts.js"],
+    xlsx: [V + "xlsx.full.min.js"],
+    heic: [V + "heic-to.js"],
+    tesseract: [V + "tesseract/tesseract.min.js"]
   };
+
+  // Cola compartida para dibujar miniaturas solo cuando se ven
+  const lazyQueue = [];
+  let lazyBusy = false;
+  async function lazyPump() {
+    if (lazyBusy) return;
+    lazyBusy = true;
+    while (lazyQueue.length) {
+      const job = lazyQueue.shift();
+      try { job.el.appendChild(await P.render(job.pdf, job.page, job.width)); } catch (e) {}
+    }
+    lazyBusy = false;
+  }
+  const lazyIO = "IntersectionObserver" in window ? new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting && en.target._job) { lazyIO.unobserve(en.target); lazyQueue.push(en.target._job); en.target._job = null; }
+    });
+    lazyPump();
+  }, { rootMargin: "400px" }) : null;
 
   async function need(names) {
     for (const n of names) for (const src of LIBS[n]) await U.loadScript(src);
@@ -115,6 +138,24 @@
       page.cleanup();
       return { canvas, width: size.width, height: size.height };
     },
+
+    /** Dibuja la página en el elemento cuando este aparece en pantalla */
+    lazy(el, pdf, page, width = 110) {
+      el._job = { el, pdf, page, width };
+      if (lazyIO) lazyIO.observe(el); else { lazyQueue.push(el._job); lazyPump(); }
+    },
+
+    /** Convierte un HEIC/HEIF (fotos de iPhone) en un Blob JPG usando heic-to */
+    async heicToJpeg(file, quality = 0.92) {
+      await need(["heic"]);
+      return await HeicTo({ blob: file, type: "image/jpeg", quality });
+    },
+
+    isHeic(file) {
+      return /image\/hei[cf]/i.test(file.type) || /\.hei[cf]$/i.test(file.name);
+    },
+
+    need(...names) { return need(names); },
 
     /** Crea la cuadrícula de miniaturas. Devuelve los elementos <figure> en orden. */
     async thumbs(pdf, container, { onClick, width = 110, badge = false } = {}) {
