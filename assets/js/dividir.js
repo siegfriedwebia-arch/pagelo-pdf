@@ -1,6 +1,7 @@
 /* Dividir PDF: por rangos, cada N páginas o una página por archivo */
 (function () {
   "use strict";
+  const ready = P.uses("pdfjs", "pdflib", "zip");
   const status = U.$("#status");
   const btn = U.$("#run");
   const rangesIn = U.$("#ranges");
@@ -37,6 +38,7 @@
   }
 
   U.$("#file").addEventListener("change", async e => {
+    await ready;
     const f = e.target.files[0];
     if (!f) return;
     try {

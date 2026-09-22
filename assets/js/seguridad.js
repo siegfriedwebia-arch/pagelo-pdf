@@ -1,6 +1,7 @@
 /* Proteger PDF (cifrado AES-256 con contraseña) y desbloquear PDF (quitar la contraseña sabiendo cuál es) */
 (function () {
   "use strict";
+  const ready = P.uses("pdflib");
   const mode = U.$("#tool").dataset.mode; // proteger | desbloquear
   const status = U.$("#status");
   const btn = U.$("#run");
@@ -27,6 +28,7 @@
   }
 
   U.$("#file").addEventListener("change", async e => {
+    await ready;
     file = e.target.files[0];
     if (!file) return;
     status.className = "status";

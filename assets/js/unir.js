@@ -1,13 +1,15 @@
 /* Unir PDF: ordena varios archivos y los junta en uno */
 (function () {
   "use strict";
+  const ready = P.uses("pdfjs", "pdflib");
   const list = U.$("#files");
   const status = U.$("#status");
   const btn = U.$("#run");
   let items = []; // { file, bytes, pages }
 
   async function add(fileList) {
-    const pdfs = [...fileList].filter(P.isPdf);
+    const pdfs = [...fileList].filter(P.isPdf); // se copia antes de esperar: el campo se vacía después
+    await ready;
     if (!pdfs.length) { status.className = "status error"; status.textContent = "Elige archivos PDF."; return; }
     status.className = "status";
     status.textContent = "Leyendo archivos…";

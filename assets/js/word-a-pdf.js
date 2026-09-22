@@ -1,12 +1,14 @@
 /* Word (.docx) a PDF: mammoth convierte el Word en HTML y pdfmake genera un PDF con texto real. */
 (function () {
   "use strict";
+  const ready = P.uses("mammoth", "pdfmake");
   const status = U.$("#status");
   const btn = U.$("#run");
   const previewBox = U.$("#preview");
   let file, html;
 
   U.$("#file").addEventListener("change", async e => {
+    await ready;
     file = e.target.files[0];
     if (!file) return;
     status.className = "status";

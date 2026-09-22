@@ -2,13 +2,43 @@
    Usa pdf-lib (editar) y pdf.js (ver y dibujar páginas). Todo ocurre en el navegador. */
 (function () {
   "use strict";
-  if (window.pdfjsLib) pdfjsLib.GlobalWorkerOptions.workerSrc = "assets/vendor/pdf.worker.min.js";
-  const PDFDocument = window.PDFLib && PDFLib.PDFDocument;
-
   class FriendlyError extends Error {}
+
+  // Librerías pesadas: se descargan en segundo plano después de mostrar la página
+  const V = "assets/vendor/";
+  const LIBS = {
+    pdfjs: [V + "pdf.min.js"],
+    pdflib: [V + "pdf-lib.min.js"],
+    zip: [V + "jszip.min.js"],
+    docx: [V + "docx.min.js"],
+    mammoth: [V + "mammoth.browser.min.js"],
+    pdfmake: [V + "pdfmake.min.js", V + "vfs_fonts.js", V + "html-to-pdfmake.min.js"]
+  };
+
+  async function need(names) {
+    for (const n of names) for (const src of LIBS[n]) await U.loadScript(src);
+    if (window.pdfjsLib) pdfjsLib.GlobalWorkerOptions.workerSrc = V + "pdf.worker.min.js";
+  }
 
   const P = {
     FriendlyError,
+
+    /** Pide las librerías que usa la herramienta. Empiezan a bajarse cuando el navegador está libre. */
+    uses(...names) {
+      let start;
+      const kick = new Promise(r => { start = r; });
+      const go = () => start();
+      // Se empiezan a descargar en cuanto la persona toca la página (por ejemplo, al pulsar «Elegir PDF»),
+      // así no gastan datos ni procesador si solo está leyendo.
+      ["pointerdown", "keydown", "dragenter", "change"].forEach(ev => document.addEventListener(ev, go, { once: true, capture: true, passive: true }));
+      const ready = kick.then(() => need(names));
+      ready.catch(() => {
+        const up = document.getElementById("upload-error");
+        const msg = "No se ha podido cargar la herramienta. Revisa tu conexión y recarga la página.";
+        if (up) { up.textContent = msg; up.hidden = false; } else U.toast(msg);
+      });
+      return ready;
+    },
 
     async read(file) {
       return new Uint8Array(await file.arrayBuffer());
@@ -33,10 +63,10 @@
     /** Abre un PDF para editarlo con pdf-lib. Los PDF con restricciones pero sin contraseña de apertura se abren igual. */
     async openEdit(bytes, password) {
       try {
-        return await PDFDocument.load(bytes, password !== undefined ? { password } : undefined);
+        return await PDFLib.PDFDocument.load(bytes, password !== undefined ? { password } : undefined);
       } catch (e) {
         if (e && /encrypted/i.test(e.message) && password === undefined) {
-          try { return await PDFDocument.load(bytes, { password: "" }); } catch (e2) {}
+          try { return await PDFLib.PDFDocument.load(bytes, { password: "" }); } catch (e2) {}
           throw new FriendlyError("Este PDF tiene contraseña. Quítala primero con la herramienta «Desbloquear PDF».");
         }
         if (e && /password/i.test(e.message)) throw new FriendlyError("La contraseña no es correcta.");
@@ -104,15 +134,28 @@
         container.appendChild(fig);
         figs.push(fig);
       }
-      // Se dibujan de una en una para no bloquear el navegador con PDF largos
-      (async () => {
-        for (let i = 0; i < figs.length; i++) {
-          try {
-            const c = await P.render(pdf, i + 1, width);
-            figs[i].querySelector(".thumb").appendChild(c);
-          } catch (e) {}
+      // Solo se dibujan las miniaturas que están (o van a estar) en pantalla, de una en una
+      const queue = [];
+      let busy = false;
+      const pump = async () => {
+        if (busy) return;
+        busy = true;
+        while (queue.length) {
+          const fig = queue.shift();
+          try { fig.querySelector(".thumb").appendChild(await P.render(pdf, +fig.dataset.page, width)); } catch (e) {}
         }
-      })();
+        busy = false;
+      };
+      if ("IntersectionObserver" in window) {
+        const io = new IntersectionObserver(entries => {
+          entries.forEach(en => { if (en.isIntersecting) { io.unobserve(en.target); queue.push(en.target); } });
+          pump();
+        }, { rootMargin: "400px" });
+        figs.forEach(f => io.observe(f));
+      } else {
+        queue.push(...figs);
+        pump();
+      }
       return figs;
     },
 

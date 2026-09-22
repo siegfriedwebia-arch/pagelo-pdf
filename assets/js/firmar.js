@@ -1,6 +1,7 @@
 /* Firmar PDF: dibuja, escribe o sube tu firma y colócala donde quieras */
 (function () {
   "use strict";
+  const ready = P.uses("pdfjs", "pdflib");
   const status = U.$("#status");
   const btn = U.$("#run");
   const viewer = U.$("#viewer");
@@ -221,6 +222,7 @@
   window.addEventListener("resize", () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => view && showPage(current), 250); });
 
   U.$("#file").addEventListener("change", async e => {
+    await ready;
     file = e.target.files[0];
     if (!file) return;
     try {

@@ -51,7 +51,8 @@ Todos los archivos pesan menos de 25 MB, dentro del límite de Cloudflare Pages.
 
 ## 5. Google AdSense y el aviso de cookies
 
-La web ya lleva el código de AdSense en todas las páginas, el archivo `ads.txt`,
+La web ya lleva la etiqueta de AdSense en todas las páginas (el código de anuncios se carga
+desde `assets/js/common.js` cuando la página ya se ha mostrado, para no ralentizarla), el archivo `ads.txt`,
 la política de cookies y el enlace «Configuración de privacidad y cookies» en el pie.
 Solo falta poner tu ID de editor:
 

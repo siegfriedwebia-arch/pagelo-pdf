@@ -3,6 +3,7 @@
    - Recomendada / Extrema: convierte cada página en una imagen JPG optimizada. Reduce mucho los PDF escaneados o con fotos. */
 (function () {
   "use strict";
+  const ready = P.uses("pdfjs", "pdflib");
   const status = U.$("#status");
   const btn = U.$("#run");
   const bar = U.$("#bar");
@@ -14,6 +15,7 @@
   };
 
   U.$("#file").addEventListener("change", async e => {
+    await ready;
     file = e.target.files[0];
     if (!file) return;
     try {

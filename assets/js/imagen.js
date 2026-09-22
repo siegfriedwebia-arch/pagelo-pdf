@@ -165,6 +165,7 @@
 
   zipBtn.addEventListener("click", async () => {
     zipBtn.disabled = true;
+    await U.loadScript("assets/vendor/jszip.min.js");
     const zip = new JSZip();
     const used = new Set();
     outputs.forEach(o => {

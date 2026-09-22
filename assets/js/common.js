@@ -122,8 +122,38 @@
       return new URLSearchParams(location.search).get(name);
     },
 
-    sleep: ms => new Promise(r => setTimeout(r, ms))
+    sleep: ms => new Promise(r => setTimeout(r, ms)),
+
+    /** Carga un script una sola vez y devuelve una promesa */
+    loadScript(src) {
+      U._scripts = U._scripts || {};
+      if (!U._scripts[src]) {
+        U._scripts[src] = new Promise((resolve, reject) => {
+          const s = document.createElement("script");
+          s.src = src;
+          s.onload = resolve;
+          s.onerror = () => { delete U._scripts[src]; reject(new Error("No se ha podido cargar " + src)); };
+          document.head.appendChild(s);
+        });
+      }
+      return U._scripts[src];
+    }
   };
+
+  // Google AdSense: se carga cuando la página ya está lista y solo si hay un ID real
+  window.addEventListener("load", () => {
+    const meta = document.querySelector('meta[name="google-adsense-account"]');
+    const id = meta && meta.content;
+    if (!id || /X/.test(id)) return;
+    const go = () => {
+      const s = document.createElement("script");
+      s.async = true;
+      s.crossOrigin = "anonymous";
+      s.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=" + id;
+      document.head.appendChild(s);
+    };
+    if ("requestIdleCallback" in window) requestIdleCallback(go, { timeout: 2500 }); else setTimeout(go, 1200);
+  });
 
   window.U = U;
 })();

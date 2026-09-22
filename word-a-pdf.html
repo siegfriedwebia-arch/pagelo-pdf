@@ -15,13 +15,14 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 30'%3E%3Cpath d='M2 2h15l7 7v19H2z' fill='white' stroke='%2316213A' stroke-width='2.2' stroke-linejoin='round'/%3E%3Cpath d='M17 2v7h7z' fill='%23D13B2E'/%3E%3Cpath d='M7 15h12M7 20h8' stroke='%2316213A' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="assets/css/style.css">
   <script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Word a PDF", "url": "https://tudominio.com/word-a-pdf.html", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Cualquiera (navegador)", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Se suben mis archivos a algún servidor?", "acceptedAnswer": {"@type": "Answer", "text": "No. Todo el proceso ocurre en tu navegador: tus documentos no salen de tu dispositivo y nadie más puede verlos."}}, {"@type": "Question", "name": "¿Sirven los .doc antiguos?", "acceptedAnswer": {"@type": "Answer", "text": "No se pueden leer en el navegador. Ábrelos en Word, Google Docs o LibreOffice y guárdalos como .docx."}}, {"@type": "Question", "name": "¿Queda igual que en Word?", "acceptedAnswer": {"@type": "Answer", "text": "El contenido sí; el diseño puede cambiar un poco (fuentes, encabezados y pies de página). Para documentos con maquetación compleja, guarda como PDF desde Word."}}]}</script>
-  <!-- Google AdSense: también muestra el aviso de cookies (Privacidad y mensajes) a los visitantes de Europa -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+  <!-- Google AdSense: verificación de la cuenta. El código de anuncios (y el aviso de cookies)
+       se carga desde assets/js/common.js cuando la página ya se ha mostrado. -->
+  <meta name="google-adsense-account" content="ca-pub-XXXXXXXXXXXXXXXX">
 </head>
 <body data-cat="convertir">
 <a class="visually-hidden" href="#main">Saltar al contenido</a>
@@ -92,10 +93,6 @@
   </div>
 </footer>
 <script src="assets/js/common.js"></script>
-<script src="assets/vendor/mammoth.browser.min.js"></script>
-<script src="assets/vendor/pdfmake.min.js"></script>
-<script src="assets/vendor/vfs_fonts.js"></script>
-<script src="assets/vendor/html-to-pdfmake.min.js"></script>
 <script src="assets/js/pdf-kit.js"></script>
 <script src="assets/js/word-a-pdf.js"></script>
 </body>

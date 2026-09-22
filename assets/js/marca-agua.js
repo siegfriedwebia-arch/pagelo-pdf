@@ -1,15 +1,15 @@
 /* Añadir marca de agua (texto o imagen) a un PDF, con vista previa real de la primera página */
 (function () {
   "use strict";
+  const ready = P.uses("pdfjs", "pdflib");
   const status = U.$("#status");
   const btn = U.$("#run");
   const previewBox = U.$("#viewer");
   let file, bytes, view, logo = null, type = "text";
-  const { rgb, degrees, StandardFonts } = PDFLib;
 
   function hexToRgb(hex) {
     const n = parseInt(hex.slice(1), 16);
-    return rgb(((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255);
+    return PDFLib.rgb(((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255);
   }
 
   function opts() {
@@ -38,8 +38,8 @@
       // Se gira alrededor del centro de la marca
       const x = cx - (w / 2 * cos - h / 2 * sin);
       const y = cy - (w / 2 * sin + h / 2 * cos);
-      if (type === "text") page.drawText(o.text, { x, y, size: o.size, font, color: o.color, opacity: o.opacity, rotate: degrees(angle) });
-      else page.drawImage(img, { x, y, width: w, height: h, opacity: o.opacity, rotate: degrees(angle) });
+      if (type === "text") page.drawText(o.text, { x, y, size: o.size, font, color: o.color, opacity: o.opacity, rotate: PDFLib.degrees(angle) });
+      else page.drawImage(img, { x, y, width: w, height: h, opacity: o.opacity, rotate: PDFLib.degrees(angle) });
     };
 
     if (o.layout === "tile") {
@@ -62,7 +62,7 @@
       doc.addPage(p);
     }
     const o = opts();
-    const font = await doc.embedFont(StandardFonts.HelveticaBold);
+    const font = await doc.embedFont(PDFLib.StandardFonts.HelveticaBold);
     let img = null;
     if (type === "image") {
       if (!logo) throw new P.FriendlyError("Elige una imagen para la marca de agua.");
@@ -136,6 +136,7 @@
   }));
 
   U.$("#file").addEventListener("change", async e => {
+    await ready;
     file = e.target.files[0];
     if (!file) return;
     try {

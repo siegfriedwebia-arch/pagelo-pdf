@@ -1,12 +1,14 @@
 /* PDF a JPG o PNG: cada página se convierte en una imagen */
 (function () {
   "use strict";
+  const ready = P.uses("pdfjs", "zip");
   const status = U.$("#status");
   const btn = U.$("#run");
   const bar = U.$("#bar");
   let file, bytes, view, name;
 
   U.$("#file").addEventListener("change", async e => {
+    await ready;
     file = e.target.files[0];
     if (!file) return;
     try {

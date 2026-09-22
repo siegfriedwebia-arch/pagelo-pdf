@@ -1,6 +1,7 @@
 /* Imágenes (JPG, PNG, WebP…) a PDF, en el orden que elijas */
 (function () {
   "use strict";
+  const ready = P.uses("pdflib");
   const list = U.$("#files");
   const status = U.$("#status");
   const btn = U.$("#run");
@@ -103,6 +104,7 @@
   }
 
   btn.addEventListener("click", async () => {
+    await ready;
     btn.disabled = true;
     status.className = "status";
     try {

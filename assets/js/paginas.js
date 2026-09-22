@@ -1,6 +1,7 @@
 /* Rotar, eliminar y extraer páginas. El modo se lee de data-mode en #tool. */
 (function () {
   "use strict";
+  const ready = P.uses("pdfjs", "pdflib", "zip");
   const mode = U.$("#tool").dataset.mode; // rotar | eliminar | extraer
   const status = U.$("#status");
   const btn = U.$("#run");
@@ -38,6 +39,7 @@
   }
 
   U.$("#file").addEventListener("change", async e => {
+    await ready;
     const f = e.target.files[0];
     if (!f) return;
     try {
