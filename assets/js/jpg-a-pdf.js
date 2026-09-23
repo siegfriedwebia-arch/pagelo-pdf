@@ -31,7 +31,7 @@
       list.appendChild(li);
     });
     status.className = "status";
-    status.textContent = items.length ? `${items.length} imagen${items.length > 1 ? "es" : ""}. Cada una será una página.` : "Añade imágenes.";
+    status.textContent = items.length ? `${items.length} ${U.pl(items.length, "imagen", "imagenes")}. Cada una será una página.` : "Añade imágenes.";
     btn.disabled = !items.length;
   }
 
@@ -135,7 +135,7 @@
         page.drawImage(img, { x: (pw - w) / 2, y: (ph - h) / 2, width: w, height: h });
       }
       const bytes = await P.save(doc);
-      P.finish({ title: "PDF creado", detail: `${items.length} página${items.length > 1 ? "s" : ""} · ${U.formatBytes(bytes.length)}`, blob: P.blob(bytes), name: "imagenes.pdf" });
+      P.finish({ title: "PDF creado", detail: `${items.length} ${U.pl(items.length, "página", "páginas")} · ${U.formatBytes(bytes.length)}`, blob: P.blob(bytes), name: "imagenes.pdf" });
     } catch (e) {
       P.fail(status, e);
       btn.disabled = false;

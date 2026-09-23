@@ -5,7 +5,7 @@
   class FriendlyError extends Error {}
 
   // Librerías pesadas: se descargan en segundo plano después de mostrar la página
-  const V = "assets/vendor/";
+  const V = U.root + "assets/vendor/";
   const LIBS = {
     pdfjs: [V + "pdf.min.js"],
     pdflib: [V + "pdf-lib.min.js"],

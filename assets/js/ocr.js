@@ -36,7 +36,7 @@
         img.style.maxWidth = "220px";
         cover.appendChild(img);
       }
-      U.$("#doc-info").textContent = `${list.length > 1 ? list.length + " imágenes" : file.name} · ${pageCount} página${pageCount > 1 ? "s" : ""}`;
+      U.$("#doc-info").textContent = `${list.length > 1 ? list.length + " imágenes" : file.name} · ${pageCount} ${U.pl(pageCount, "página", "páginas")}`;
       P.showWork();
       btn.disabled = false;
     } catch (err) { P.fail(status, err); }
@@ -71,10 +71,10 @@
     let pageNow = 0;
     try {
       status.textContent = "Preparando el reconocimiento (la primera vez descarga unos 5 MB)…";
-      worker = await Tesseract.createWorker("spa", 1, {
-        workerPath: abs("assets/vendor/tesseract/worker.min.js"),
-        corePath: abs("assets/vendor/tesseract/core/"),
-        langPath: abs("assets/vendor/tesseract/lang"),
+      worker = await Tesseract.createWorker(U.$("#ocr-lang").value, 1, {
+        workerPath: abs(U.root + "assets/vendor/tesseract/worker.min.js"),
+        corePath: abs(U.root + "assets/vendor/tesseract/core/"),
+        langPath: abs(U.root + "assets/vendor/tesseract/lang"),
         gzip: true,
         logger: m => {
           if (m.status === "recognizing text") {

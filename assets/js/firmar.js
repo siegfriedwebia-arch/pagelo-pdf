@@ -199,14 +199,14 @@
     btn.disabled = !placements.length;
     status.className = "status";
     status.textContent = placements.length
-      ? `${placements.length} elemento${placements.length > 1 ? "s" : ""} colocado${placements.length > 1 ? "s" : ""}. Arrástralos para moverlos y usa ⤡ para cambiar el tamaño.`
+      ? `${placements.length} ${U.pl(placements.length, "elemento", "elementos")} ${U.pl(placements.length, "colocado", "colocados")}. Arrástralos para moverlos y usa ⤡ para cambiar el tamaño.`
       : "Crea tu firma y pulsa «Colocar en esta página».";
   }
 
   U.$("#place").addEventListener("click", () => signature && place(signature.url, signature.ratio, 0.3));
   U.$("#add-date").addEventListener("click", () => {
     const c = document.createElement("canvas");
-    const text = new Date().toLocaleDateString("es-ES");
+    const text = new Date().toLocaleDateString(U.locale);
     const ctx = c.getContext("2d");
     ctx.font = "48px Helvetica, Arial, sans-serif";
     c.width = Math.ceil(ctx.measureText(text).width) + 10; c.height = 64;

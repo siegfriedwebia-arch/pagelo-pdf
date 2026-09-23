@@ -80,7 +80,7 @@
   // Fotos HEIC del iPhone: se convierten primero (la mayoría de navegadores no las abren)
   async function decodable(file) {
     if (!isHeic(file)) return file;
-    await U.loadScript("assets/vendor/heic-to.js");
+    await U.loadScript(U.root + "assets/vendor/heic-to.js");
     return await HeicTo({ blob: file, type: "image/png" });
   }
 
@@ -176,7 +176,7 @@
 
   zipBtn.addEventListener("click", async () => {
     zipBtn.disabled = true;
-    await U.loadScript("assets/vendor/jszip.min.js");
+    await U.loadScript(U.root + "assets/vendor/jszip.min.js");
     const zip = new JSZip();
     const used = new Set();
     outputs.forEach(o => {

@@ -305,3 +305,11 @@ input.form-field[type=checkbox], input.form-field[type=radio] { width: auto; hei
 
 /* OCR */
 .ocr-text { width: 100%; min-height: 320px; font: 15px/1.5 ui-monospace, Consolas, monospace; }
+
+/* Selector de idioma */
+.lang-switch { font-family: var(--font-display); font-weight: 600; font-size: .85rem; text-decoration: none; border: 1px solid var(--line); border-radius: 8px; padding: .35rem .55rem !important; color: var(--ink) !important; }
+.lang-switch:hover { border-color: var(--ink); }
+.lang-bar { background: var(--ink); color: var(--paper); font-size: .95rem; }
+.lang-bar .wrap { display: flex; align-items: center; justify-content: center; gap: .8rem; padding: .55rem 0; flex-wrap: wrap; }
+.lang-bar a { color: var(--paper); font-weight: 700; }
+.lang-bar button { background: none; border: 0; color: var(--paper); font-size: 1.1rem; cursor: pointer; opacity: .7; }

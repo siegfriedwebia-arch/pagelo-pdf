@@ -15,7 +15,7 @@
     status.className = "status";
     if (mode === "rotar") {
       const n = Object.values(rot).filter(v => v % 360).length;
-      status.textContent = n ? `${n} página${n > 1 ? "s" : ""} girada${n > 1 ? "s" : ""}.` : "Toca una página para girarla o usa los botones para girarlas todas.";
+      status.textContent = n ? `${n} ${U.pl(n, "página", "páginas")} ${U.pl(n, "girada", "giradas")}.` : "Toca una página para girarla o usa los botones para girarlas todas.";
       btn.disabled = n === 0;
       return;
     }
@@ -23,11 +23,11 @@
     if (rangeIn && document.activeElement !== rangeIn) rangeIn.value = P.compact(picked);
     const n = picked.size;
     if (mode === "eliminar") {
-      status.textContent = n ? `Se eliminarán ${n} página${n > 1 ? "s" : ""}. Quedarán ${view.numPages - n}.` : "Toca las páginas que quieras eliminar.";
+      status.textContent = n ? `Se eliminarán ${n} ${U.pl(n, "página", "páginas")}. Quedarán ${view.numPages - n}.` : "Toca las páginas que quieras eliminar.";
       btn.disabled = n === 0 || n === view.numPages;
       if (n === view.numPages) { status.className = "status error"; status.textContent = "No puedes eliminar todas las páginas."; }
     } else {
-      status.textContent = n ? `${n} página${n > 1 ? "s" : ""} seleccionada${n > 1 ? "s" : ""}.` : "Toca las páginas que quieras sacar.";
+      status.textContent = n ? `${n} ${U.pl(n, "página", "páginas")} ${U.pl(n, "seleccionada", "seleccionadas")}.` : "Toca las páginas que quieras sacar.";
       btn.disabled = n === 0;
     }
   }

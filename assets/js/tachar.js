@@ -13,7 +13,8 @@
     dni: /\b\d{8}[\s-]?[A-HJ-NP-TV-Z]\b|\b[XYZ][\s-]?\d{7}[\s-]?[A-HJ-NP-TV-Z]\b/gi,
     iban: /\b[A-Z]{2}\d{2}(?:[\s-]?[A-Z0-9]{4}){4,7}(?:[\s-]?[A-Z0-9]{1,4})?\b/g,
     email: /[\w.+-]+@[\w-]+\.[\w.-]+/g,
-    tel: /(?:\+34[\s-]?)?\b[6789]\d{2}[\s-]?\d{2,3}[\s-]?\d{2,3}(?:[\s-]?\d{2})?\b/g,
+    tel: /(?:\+34[\s-]?)?\b[6789]\d{2}[\s-]?\d{2,3}[\s-]?\d{2,3}(?:[\s-]?\d{2})?\b|(?:\+1[\s.-]?)?\(?\b\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}\b/g,
+    ssn: /\b\d{3}-\d{2}-\d{4}\b/g,
     tarjeta: /\b(?:\d{4}[\s-]?){3}\d{4}\b/g
   };
 
@@ -44,7 +45,7 @@
     const pages = new Set(boxes.map(b => b.page)).size;
     status.className = "status";
     status.textContent = boxes.length
-      ? `${boxes.length} zona${boxes.length > 1 ? "s" : ""} tachada${boxes.length > 1 ? "s" : ""} en ${pages} página${pages > 1 ? "s" : ""}. Toca una zona para quitarla.`
+      ? `${boxes.length} ${U.pl(boxes.length, "zona", "zonas")} ${U.pl(boxes.length, "tachada", "tachadas")} en ${pages} ${U.pl(pages, "página", "páginas")}. Toca una zona para quitarla.`
       : "Arrastra sobre la página para tachar, o busca datos automáticamente.";
   }
 

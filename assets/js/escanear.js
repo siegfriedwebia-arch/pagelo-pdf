@@ -308,7 +308,7 @@
   function update() {
     btn.disabled = !shots.length;
     status.className = "status";
-    status.textContent = `${shots.length} página${shots.length > 1 ? "s" : ""}. Ajusta las esquinas al borde del papel.`;
+    status.textContent = `${shots.length} ${U.pl(shots.length, "página", "páginas")}. Ajusta las esquinas al borde del papel.`;
   }
 
   U.$("#file").addEventListener("change", e => addFiles(e.target.files));
@@ -335,7 +335,7 @@
         page.drawImage(img, { x: (pw - img.width * k) / 2, y: (ph - img.height * k) / 2, width: img.width * k, height: img.height * k });
       }
       const out = await P.save(doc);
-      P.finish({ title: "Documento escaneado", detail: `${shots.length} página${shots.length > 1 ? "s" : ""} · ${U.formatBytes(out.length)}`, blob: P.blob(out), name: "escaneo.pdf" });
+      P.finish({ title: "Documento escaneado", detail: `${shots.length} ${U.pl(shots.length, "página", "páginas")} · ${U.formatBytes(out.length)}`, blob: P.blob(out), name: "escaneo.pdf" });
     } catch (e) { P.fail(status, e); btn.disabled = false; }
   });
 })();

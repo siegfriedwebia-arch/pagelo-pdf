@@ -166,7 +166,7 @@
     btn.disabled = !items.length;
     status.className = "status";
     status.textContent = items.length
-      ? `${items.length} cambio${items.length > 1 ? "s" : ""}. Toca un elemento para editarlo o moverlo.`
+      ? `${items.length} ${U.pl(items.length, "cambio", "cambios")}. Toca un elemento para editarlo o moverlo.`
       : "Elige qué quieres añadir.";
   }
 

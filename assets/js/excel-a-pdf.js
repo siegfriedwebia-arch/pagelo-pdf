@@ -120,7 +120,7 @@
         info: { title: U.baseName(file.name), producer: "PDFGratis" }
       };
       const blob = await new Promise((resolve, reject) => { try { pdfMake.createPdf(def).getBlob(resolve); } catch (e) { reject(e); } });
-      P.finish({ title: "PDF listo", detail: `${names.length} hoja${names.length > 1 ? "s" : ""} · ${U.formatBytes(blob.size)}`, blob, name: U.baseName(file.name) + ".pdf" });
+      P.finish({ title: "PDF listo", detail: `${names.length} ${U.pl(names.length, "hoja", "hojas")} · ${U.formatBytes(blob.size)}`, blob, name: U.baseName(file.name) + ".pdf" });
     } catch (e) { P.fail(status, e); btn.disabled = false; }
   });
 })();

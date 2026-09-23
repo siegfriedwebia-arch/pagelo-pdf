@@ -35,6 +35,25 @@
       });
     }
 
+    // Aviso discreto si el navegador está en otro idioma (sin redirigir: Google lo prefiere así)
+    try {
+      const other = document.querySelector('link[rel="alternate"][hreflang="' + (U.lang === "es" ? "en" : "es") + '"]');
+      const nav = (navigator.language || "").toLowerCase();
+      const wantsOther = U.lang === "es" ? !nav.startsWith("es") : nav.startsWith("es");
+      if (other && wantsOther && !localStorage.getItem("lang-bar-closed")) {
+        const bar = document.createElement("div");
+        bar.className = "lang-bar";
+        bar.innerHTML = U.lang === "es"
+          ? '<div class="wrap"><span>This page is also available in English.</span><a lang="en"></a><button type="button" aria-label="Close">✕</button></div>'
+          : '<div class="wrap"><span>Esta página también está en español.</span><a lang="es"></a><button type="button" aria-label="Cerrar">✕</button></div>';
+        const a = bar.querySelector("a");
+        a.href = relative(other.href);
+        a.textContent = U.lang === "es" ? "View in English →" : "Ver en español →";
+        bar.querySelector("button").addEventListener("click", () => { bar.remove(); try { localStorage.setItem("lang-bar-closed", "1"); } catch (e) {} });
+        document.body.insertBefore(bar, document.body.firstChild);
+      }
+    } catch (e) {}
+
     // «Configuración de privacidad y cookies»: vuelve a abrir el aviso de consentimiento de Google
     U.$$(".cookie-settings").forEach(a => a.addEventListener("click", e => {
       if (window.googlefc && googlefc.callbackQueue && googlefc.showRevocationMessage) {
@@ -56,8 +75,21 @@
     });
   });
 
+  /** Enlace a la otra versión usando el selector de idioma de la cabecera (funciona también sin dominio) */
+  function relative(href) {
+    const sw = document.querySelector(".lang-switch");
+    return sw ? sw.getAttribute("href") : href;
+  }
+
   // ---------- Utilidades ----------
+  const LANG = document.documentElement.lang === "en" ? "en" : "es";
   const U = {
+    lang: LANG,
+    locale: LANG === "en" ? "en-US" : "es-ES",
+    /** Ruta a la raíz de la web ("" en español, "../" en /en/) */
+    root: window.SITE_ROOT || "",
+    /** Plural: U.pl(3, "página", "páginas") → "páginas" */
+    pl: (n, one, many) => (n === 1 ? one : many),
     $: (sel, ctx = document) => ctx.querySelector(sel),
     $$: (sel, ctx = document) => [...ctx.querySelectorAll(sel)],
 
@@ -70,7 +102,7 @@
       const units = ["B", "KB", "MB", "GB"];
       let i = 0, n = bytes;
       while (n >= 1024 && i < units.length - 1) { n /= 1024; i++; }
-      return n.toFixed(i === 0 ? 0 : 1).replace(".", ",") + " " + units[i];
+      return n.toFixed(i === 0 ? 0 : 1).replace(".", LANG === "en" ? "." : ",") + " " + units[i];
     },
 
     toast(msg) {

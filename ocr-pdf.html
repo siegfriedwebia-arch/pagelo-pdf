@@ -6,6 +6,9 @@
   <title>OCR online gratis: PDF escaneado e imagen a texto | PDFGratis</title>
   <meta name="description" content="Extrae el texto de PDF escaneados y fotos con OCR en español. Descarga un PDF con texto seleccionable y buscable o el texto plano. Gratis.">
   <link rel="canonical" href="https://tudominio.com/ocr-pdf.html">
+  <link rel="alternate" hreflang="es" href="https://tudominio.com/ocr-pdf.html">
+  <link rel="alternate" hreflang="en" href="https://tudominio.com/en/ocr-pdf.html">
+  <link rel="alternate" hreflang="x-default" href="https://tudominio.com/en/ocr-pdf.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="PDFGratis">
   <meta property="og:title" content="OCR online gratis: PDF escaneado e imagen a texto | PDFGratis">
@@ -37,6 +40,7 @@
       <a href="editar-pdf.html">Editar</a>
       <a href="firmar-pdf.html">Firmar</a>
       <a href="index.html#todas">Todas</a>
+      <a class="lang-switch" href="en/ocr-pdf.html" hreflang="en" lang="en" title="English version">EN</a>
       <button class="icon-btn" id="theme-btn" type="button" aria-label="Cambiar entre modo claro y oscuro"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></button>
     </nav>
   </div>
@@ -66,7 +70,8 @@
           <span class="label">Quiero obtener</span>
           <label class="check"><input type="checkbox" id="out-pdf" checked> PDF con texto seleccionable y buscable</label>
           <label class="check" style="margin-bottom:1rem"><input type="checkbox" id="out-txt" checked> El texto para copiarlo</label>
-          <p class="hint" style="margin-bottom:1rem">Idioma: español. Tarda unos segundos por página.</p>
+          <div class="field"><label for="ocr-lang">Idioma del documento</label><select id="ocr-lang"><option value="spa">Español</option><option value="eng">Inglés</option><option value="spa+eng">Español e inglés</option></select></div>
+          <p class="hint" style="margin-bottom:1rem">Tarda unos segundos por página.</p>
           <button class="btn big" id="run" type="button" disabled>Reconocer texto</button>
           <div class="progress"><i id="bar"></i></div>
           <p class="status" id="status" aria-live="polite"></p>

@@ -27,7 +27,7 @@
     status.className = "status";
     try {
       const p = plan();
-      status.textContent = `Se crearán ${p.length} archivo${p.length > 1 ? "s" : ""}: ` +
+      status.textContent = `Se crearán ${p.length} ${U.pl(p.length, "archivo", "archivos")}: ` +
         p.slice(0, 6).map(([a, b]) => a === b ? `pág. ${a}` : `págs. ${a}-${b}`).join(" · ") + (p.length > 6 ? " …" : "");
       btn.disabled = false;
     } catch (e) {

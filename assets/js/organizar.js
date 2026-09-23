@@ -12,7 +12,7 @@
     const n = grid.children.length;
     U.$$(".pg figcaption", grid).forEach((c, i) => { c.textContent = `Página ${i + 1}`; });
     status.className = "status";
-    status.textContent = n ? `${n} página${n > 1 ? "s" : ""}. Arrastra con ⠿ para cambiar el orden.` : "No queda ninguna página.";
+    status.textContent = n ? `${n} ${U.pl(n, "página", "páginas")}. Arrastra con ⠿ para cambiar el orden.` : "No queda ninguna página.";
     btn.disabled = n === 0;
   }
 

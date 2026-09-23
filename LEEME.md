@@ -10,6 +10,12 @@ Solo pagas el dominio.
 2. Instala la extensión **Live Server** (de Ritwick Dey).
 3. Clic derecho en `index.html` → **Open with Live Server**.
 
+## Versión en inglés
+
+La carpeta `en/` contiene la web completa en inglés (`tudominio.com/en/merge-pdf.html`…),
+con selector ES/EN en la cabecera, etiquetas hreflang para Google y el sitemap con las dos versiones.
+Se genera automáticamente con la carpeta `pdfgratis-generador` (ver su LEEME).
+
 ## 2. Estructura
 
 ```

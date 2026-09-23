@@ -36,7 +36,7 @@
       li.innerHTML = `
         <span class="handle" aria-hidden="true">⋮⋮</span>
         <div class="mini"></div>
-        <div class="meta"><b></b><span>${it.pages} página${it.pages > 1 ? "s" : ""} · ${U.formatBytes(it.file.size)}</span></div>
+        <div class="meta"><b></b><span>${it.pages} ${U.pl(it.pages, "página", "páginas")} · ${U.formatBytes(it.file.size)}</span></div>
         <div class="act">
           <button type="button" data-a="up" aria-label="Subir">↑</button>
           <button type="button" data-a="down" aria-label="Bajar">↓</button>
