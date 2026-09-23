@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/><script>window.SITE_ROOT="../"</script>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Contact | PDFGratis</title>
+<meta content="Contact" name="description"/>
+<link href="https://tudominio.com/en/contact.html" rel="canonical"/>
+<link href="https://tudominio.com/contacto.html" hreflang="es" rel="alternate"/>
+<link href="https://tudominio.com/en/contact.html" hreflang="en" rel="alternate"/>
+<link href="https://tudominio.com/en/contact.html" hreflang="x-default" rel="alternate"/>
+<meta content="website" property="og:type"/>
+<meta content="PDFGratis" property="og:site_name"/>
+<meta content="Contact | PDFGratis" property="og:title"/>
+<meta content="Contact" property="og:description"/>
+<meta content="https://tudominio.com/en/contact.html" property="og:url"/>
+<meta content="#16213A" name="theme-color"/>
+<link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 30'%3E%3Cpath d='M2 2h15l7 7v19H2z' fill='white' stroke='%2316213A' stroke-width='2.2' stroke-linejoin='round'/%3E%3Cpath d='M17 2v7h7z' fill='%23D13B2E'/%3E%3Cpath d='M7 15h12M7 20h8' stroke='%2316213A' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E" rel="icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&amp;family=Source+Sans+3:wght@400;600;700&amp;display=swap" media="print" onload="this.media='all'" rel="stylesheet"/>
+<link href="../assets/css/style.css" rel="stylesheet"/>
+<script>try{var t=localStorage.getItem("theme");if(t)document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<!-- Google AdSense: verificación de la cuenta. El código de anuncios (y el aviso de cookies)
+       se carga desde assets/js/common.js cuando la página ya se ha mostrado. -->
+<meta content="ca-pub-XXXXXXXXXXXXXXXX" name="google-adsense-account"/>
+</head>
+<body>
+<header class="site-header">
+<div class="wrap">
+<a aria-label="PDFGratis, home" class="logo" href="index.html"><svg aria-hidden="true" height="30" viewbox="0 0 26 30" width="26"><path d="M2 2h15l7 7v19H2z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2.2"></path><path d="M17 2v7h7z" fill="#D13B2E"></path><path d="M7 15h12M7 20h8" stroke="currentColor" stroke-linecap="round" stroke-width="2.2"></path></svg><span>PDF<b>Gratis</b></span></a>
+<button aria-controls="site-nav" aria-expanded="false" aria-label="Open menu" class="icon-btn menu-btn" id="menu-btn"><svg aria-hidden="true" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+<nav aria-label="Main" class="site-nav" id="site-nav">
+<a href="merge-pdf.html">Merge</a>
+<a href="compress-pdf.html">Compress</a>
+<a href="pdf-to-word.html">PDF to Word</a>
+<a href="edit-pdf.html">Edit</a>
+<a href="sign-pdf.html">Sign</a>
+<a href="index.html#todas">All tools</a>
+<a class="lang-switch" href="../contacto.html" hreflang="es" lang="es" title="Versión en español">ES</a>
+<button aria-label="Switch between light and dark mode" class="icon-btn" id="theme-btn" type="button"><svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"></path></svg></button>
+</nav>
+</div>
+</header>
+<main id="main"><div class="wrap"><section class="content">
+<h1>Contact</h1>
+<p>Found a bug, have a suggestion or missing a tool? Write to us and we'll reply as soon as possible.</p>
+<div class="panel" style="margin:1.5rem 0">
+<span class="label">Email</span>
+<p style="font-size:1.25rem;font-family:var(--font-display);font-weight:600;margin:.2rem 0 1rem;word-break:break-all"><a href="mailto:siegfriedwebia@gmail.com">siegfriedwebia@gmail.com</a></p>
+<div class="btns">
+<a class="btn" href="mailto:siegfriedwebia@gmail.com">Send an email</a>
+<button class="btn ghost" id="copy-email" type="button">Copy address</button>
+</div>
+</div>
+<h2>Or write to us here</h2>
+<form class="panel" id="contact-form">
+<div class="field"><label for="c-name">Your name</label><input autocomplete="name" id="c-name" required="" type="text"/></div>
+<div class="field"><label for="c-topic">Subject</label>
+<select id="c-topic">
+<option>A tool isn't working</option>
+<option>Suggestion</option>
+<option>I'd like a new tool</option>
+<option>Advertising or partnership</option>
+<option>Something else</option>
+</select></div>
+<div class="field"><label for="c-msg">Message</label><textarea id="c-msg" placeholder="Tell us what you need. If something's not working, tell us which tool, which browser and what happened." required="" rows="6"></textarea></div>
+<button class="btn" type="submit">Prepare email</button>
+<p class="hint">Your email app will open with the message already written. You'll just need to click Send.</p>
+</form>
+<p class="hint">Don't attach personal documents: we never need them to help you.</p>
+<script>
+(function () {
+  var email = "siegfriedwebia@gmail.com";
+  document.getElementById("copy-email").addEventListener("click", function () { U.copy(email, "Address copied"); });
+  document.getElementById("contact-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var name = document.getElementById("c-name").value.trim();
+    var topic = document.getElementById("c-topic").value;
+    var msg = document.getElementById("c-msg").value.trim();
+    var subject = "PDFGratis: " + topic;
+    var body = msg + "\n\n— " + name;
+    location.href = "mailto:" + email + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+  });
+})();
+</script></section></div></main>
+<footer class="site-footer">
+<div class="wrap">
+<p>© 2026 PDFGratis. Your files are processed in your browser and are never uploaded to the internet.</p>
+<nav aria-label="Legal">
+<a href="privacy.html">Privacy policy</a>
+<a class="cookie-settings" href="privacy.html#cookies">Privacy and cookie settings</a>
+<a href="legal-notice.html">Legal notice</a>
+<a href="contact.html">Contact</a>
+</nav>
+</div>
+</footer>
+<script src="../assets/js/en/common.js"></script>
+</body>
+</html>
