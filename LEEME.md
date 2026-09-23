@@ -10,12 +10,6 @@ Solo pagas el dominio.
 2. Instala la extensión **Live Server** (de Ritwick Dey).
 3. Clic derecho en `index.html` → **Open with Live Server**.
 
-## Versión en inglés
-
-La carpeta `en/` contiene la web completa en inglés (`tudominio.com/en/merge-pdf.html`…),
-con selector ES/EN en la cabecera, etiquetas hreflang para Google y el sitemap con las dos versiones.
-Se genera automáticamente con la carpeta `pdfgratis-generador` (ver su LEEME).
-
 ## 2. Estructura
 
 ```
@@ -36,11 +30,18 @@ assets/js/*.js              Un archivo por herramienta
 assets/vendor/              Librerías incluidas (no dependen de internet)
 ```
 
+## Direcciones sin «.html»
+
+Las direcciones de la web no llevan «.html» (`/unir-pdf`, `/en/merge-pdf`). El archivo
+`vercel.json` le dice a Vercel que las sirva así (y que redirija las antiguas con .html).
+Si publicas en Cloudflare Pages o Netlify, funcionan igual sin configurar nada.
+Al abrir la web en tu ordenador (doble clic o Live Server) los enlaces siguen funcionando.
+
 ## 3. Personalízala antes de publicar
 
 Con **Buscar y reemplazar en todos los archivos** (Ctrl+Shift+H):
 
-- `https://tudominio.com` → tu dominio (todas las páginas, sitemap.xml y robots.txt).
+- `https://pdf-gratis.vercel.app` → tu dominio, cuando lo compres (todas las páginas, sitemap.xml y robots.txt).
 - El correo de contacto (siegfriedwebia@gmail.com) está en `contacto.html`, `privacidad.html` y `aviso-legal.html`.
 - Rellena los datos entre corchetes `[ ]` de `privacidad.html` y `aviso-legal.html`.
 

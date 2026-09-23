@@ -4,6 +4,16 @@
   const root = document.documentElement;
 
   document.addEventListener("DOMContentLoaded", () => {
+    // En internet las direcciones van sin «.html» (/unir-pdf). Al abrir la web en tu ordenador
+    // (doble clic o Live Server) hace falta la extensión, así que se añade a los enlaces.
+    if (location.protocol === "file:" || /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)) {
+      U.$$('a[href^="/"]:not([href^="//"])').forEach(a => {
+        const [path, hash] = a.getAttribute("href").slice(1).split("#");
+        const file = path === "" || path.endsWith("/") ? path + "index.html" : path + ".html";
+        a.setAttribute("href", U.root + file + (hash !== undefined ? "#" + hash : ""));
+      });
+    }
+
     const themeBtn = document.getElementById("theme-btn");
     if (themeBtn) themeBtn.addEventListener("click", () => {
       const cur = root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
