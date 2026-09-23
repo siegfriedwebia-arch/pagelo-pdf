@@ -182,6 +182,18 @@
     }
   };
 
+  // Estadísticas de visitas de Vercel (sin cookies). Solo en la web publicada, no en tu ordenador.
+  (function () {
+    const canon = document.querySelector('link[rel="canonical"]');
+    const host = canon ? new URL(canon.href).hostname : "";
+    if (location.hostname !== host && !location.hostname.endsWith(".vercel.app")) return;
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    const s = document.createElement("script");
+    s.defer = true;
+    s.src = "/_vercel/insights/script.js";
+    document.head.appendChild(s);
+  })();
+
   // Google AdSense: se carga cuando la página ya está lista y solo si hay un ID real
   window.addEventListener("load", () => {
     const meta = document.querySelector('meta[name="google-adsense-account"]');

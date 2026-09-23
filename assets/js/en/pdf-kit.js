@@ -43,6 +43,52 @@
     if (window.pdfjsLib) pdfjsLib.GlobalWorkerOptions.workerSrc = V + "pdf.worker.min.js";
   }
 
+  /* ---------- Pasar el resultado a la siguiente herramienta ----------
+     El PDF se guarda solo en este navegador (IndexedDB) durante unos minutos
+     y se borra en cuanto la siguiente herramienta lo recoge. */
+  function idb() {
+    return new Promise((ok, ko) => {
+      const r = indexedDB.open("pdfgratis", 1);
+      r.onupgradeneeded = () => r.result.createObjectStore("handoff");
+      r.onsuccess = () => ok(r.result);
+      r.onerror = () => ko(r.error);
+    });
+  }
+  async function store(mode, fn) {
+    const db = await idb();
+    return new Promise((ok, ko) => {
+      const t = db.transaction("handoff", mode);
+      const req = fn(t.objectStore("handoff"));
+      t.oncomplete = () => { db.close(); ok(req && req.result); };
+      t.onerror = () => { db.close(); ko(t.error); };
+    });
+  }
+  const handoff = {
+    save: (blob, name) => store("readwrite", s => s.put({ blob, name, time: Date.now() }, "file")),
+    async take() {
+      const v = await store("readonly", s => s.get("file"));
+      await store("readwrite", s => s.delete("file"));
+      return v && Date.now() - v.time < 10 * 60 * 1000 ? v : null;
+    }
+  };
+
+  // Al llegar desde otra herramienta (?continuar), se carga el PDF automáticamente
+  if (/[?&]continuar\b/.test(location.search)) {
+    document.addEventListener("DOMContentLoaded", async () => {
+      try {
+        history.replaceState(null, "", location.pathname + location.hash);
+        const v = await handoff.take();
+        const input = document.getElementById("file");
+        if (!v || !input) return;
+        const dt = new DataTransfer();
+        dt.items.add(new File([v.blob], v.name, { type: "application/pdf" }));
+        input.files = dt.files;
+        input.dispatchEvent(new Event("change", { bubbles: true }));
+        U.toast("Continuing with your PDF");
+      } catch (e) {}
+    });
+  }
+
   const P = {
     FriendlyError,
 
@@ -258,6 +304,16 @@
       done.querySelector("#done-dl").download = name;
       done.querySelector("#done-dl").textContent = "Download " + (name.endsWith(".zip") ? "ZIP" : name.split(".").pop().toUpperCase());
       done.querySelector("#done-again").addEventListener("click", () => location.reload());
+      const next = U.$("#next");
+      if (next && /\.pdf$/i.test(name)) {
+        next.hidden = false;
+        U.$$("a.sheet", next).forEach(a => a.addEventListener("click", async e => {
+          e.preventDefault();
+          const href = a.href;
+          try { await handoff.save(blob, name); } catch (err) { /* sin almacenamiento: se abre la herramienta vacía */ }
+          location.href = href + (href.includes("?") ? "&" : "?") + "continuar";
+        }));
+      }
       done.scrollIntoView({ behavior: "smooth", block: "start" });
     },
 
