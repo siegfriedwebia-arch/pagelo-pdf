@@ -30,6 +30,14 @@ assets/js/*.js              Un archivo por herramienta
 assets/vendor/              Librerías incluidas (no dependen de internet)
 ```
 
+## App instalable (PWA)
+
+La web se puede instalar como app en el móvil y el ordenador, y funciona sin conexión:
+- `manifest.webmanifest` (y `en/manifest.webmanifest`): nombre, icono y colores de la app.
+- `sw.js`: guarda la web en el dispositivo. Se genera solo; no lo edites a mano.
+- `assets/icons/`: iconos de la app y capturas para el instalador.
+Solo funciona en la web publicada con https (Vercel), no abriendo los archivos con doble clic.
+
 ## Estadísticas de visitas (Vercel)
 
 La web ya lleva el código de Vercel Web Analytics (gratis y sin cookies).

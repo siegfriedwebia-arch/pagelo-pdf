@@ -313,3 +313,15 @@ input.form-field[type=checkbox], input.form-field[type=radio] { width: auto; hei
 .lang-bar .wrap { display: flex; align-items: center; justify-content: center; gap: .8rem; padding: .55rem 0; flex-wrap: wrap; }
 .lang-bar a { color: var(--paper); font-weight: 700; }
 .lang-bar button { background: none; border: 0; color: var(--paper); font-size: 1.1rem; cursor: pointer; opacity: .7; }
+
+/* Botón «Instalar app» y ayuda para iPhone */
+.install-btn { display: inline-flex; align-items: center; gap: .35rem; font: inherit; font-weight: 700; font-size: .88rem; padding: .4rem .7rem; border-radius: 8px; border: 1px solid var(--c-optimizar); background: var(--c-optimizar); color: #fff; cursor: pointer; }
+.install-btn:hover { filter: brightness(1.08); }
+@media (max-width: 800px) { .install-btn { margin: .3rem 0; justify-content: center; } }
+.ios-help { border: 0; border-radius: 16px; padding: 1.4rem; max-width: 340px; width: calc(100% - 2rem); background: var(--paper); color: var(--ink); box-shadow: 0 10px 40px rgba(0,0,0,.35); }
+.ios-help::backdrop { background: rgba(10, 14, 24, .55); }
+.ios-help h2 { font-size: 1.2rem; }
+.ios-help ol { padding-left: 1.2rem; margin: 0 0 1rem; }
+.ios-help li { margin-bottom: .5rem; }
+.ios-help svg { vertical-align: -3px; color: #0a7aff; }
+.install-promo { margin-top: 1rem; }

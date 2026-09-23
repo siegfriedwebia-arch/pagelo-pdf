@@ -1,0 +1,95 @@
+{
+ "id": "/en/",
+ "name": "PDFGratis: PDF tools",
+ "short_name": "PDFGratis",
+ "description": "Merge, split, compress, sign and convert PDFs for free. Works offline and your files never leave your device.",
+ "lang": "en",
+ "start_url": "/en/",
+ "scope": "/",
+ "display": "standalone",
+ "background_color": "#EDF0F4",
+ "theme_color": "#16213A",
+ "icons": [
+  {
+   "src": "/assets/icons/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png"
+  },
+  {
+   "src": "/assets/icons/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png"
+  },
+  {
+   "src": "/assets/icons/maskable-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ],
+ "shortcuts": [
+  {
+   "name": "Merge PDF",
+   "url": "/en/merge-pdf",
+   "icons": [
+    {
+     "src": "/assets/icons/icon-96.png",
+     "sizes": "96x96"
+    }
+   ]
+  },
+  {
+   "name": "Compress PDF",
+   "url": "/en/compress-pdf",
+   "icons": [
+    {
+     "src": "/assets/icons/icon-96.png",
+     "sizes": "96x96"
+    }
+   ]
+  },
+  {
+   "name": "Sign PDF",
+   "url": "/en/sign-pdf",
+   "icons": [
+    {
+     "src": "/assets/icons/icon-96.png",
+     "sizes": "96x96"
+    }
+   ]
+  },
+  {
+   "name": "Scan documents",
+   "url": "/en/scan-documents",
+   "icons": [
+    {
+     "src": "/assets/icons/icon-96.png",
+     "sizes": "96x96"
+    }
+   ]
+  }
+ ],
+ "screenshots": [
+  {
+   "src": "/assets/icons/screens/en-narrow-index.png",
+   "sizes": "412x915",
+   "type": "image/png",
+   "form_factor": "narrow",
+   "label": "All tools"
+  },
+  {
+   "src": "/assets/icons/screens/en-narrow-merge-pdf.png",
+   "sizes": "412x915",
+   "type": "image/png",
+   "form_factor": "narrow",
+   "label": "Merge PDF"
+  },
+  {
+   "src": "/assets/icons/screens/en-wide-index.png",
+   "sizes": "1280x800",
+   "type": "image/png",
+   "form_factor": "wide",
+   "label": "PDFGratis on desktop"
+  }
+ ]
+}

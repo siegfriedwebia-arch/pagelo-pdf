@@ -194,6 +194,90 @@
     document.head.appendChild(s);
   })();
 
+  // ---------- App instalable (PWA) ----------
+  // El service worker solo se activa en la web publicada (no con doble clic ni con Live Server)
+  const published = location.protocol === "https:" || (location.protocol === "http:" && !/^(localhost|127\.0\.0\.1)$/.test(location.hostname));
+  if ("serviceWorker" in navigator && published) {
+    window.addEventListener("load", () => { navigator.serviceWorker.register("/sw.js").catch(() => {}); });
+  }
+
+  let installEvent = null;
+  const standalone = () => matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+  const isIOS = () => /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+  window.addEventListener("beforeinstallprompt", e => {
+    e.preventDefault();
+    installEvent = e;
+    installButtons().forEach(b => { b.hidden = false; });
+  });
+  window.addEventListener("appinstalled", () => {
+    installEvent = null;
+    installButtons().forEach(b => { b.hidden = true; });
+    U.toast("App installed");
+  });
+
+  const installButtons = () => [...document.querySelectorAll("#install-btn, [data-install]")];
+
+  function iosHelp() {
+    let d = document.getElementById("ios-help");
+    if (!d) {
+      d = document.createElement("dialog");
+      d.id = "ios-help";
+      d.className = "ios-help";
+      const share = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3M8 7l4-4 4 4"/><path d="M6 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2h-1"/></svg>';
+      d.innerHTML = "<h2></h2><ol><li></li><li></li><li></li></ol><button class='btn' type='button'></button>";
+      d.querySelector("h2").textContent = "Install PDFGratis on iPhone";
+      const li = d.querySelectorAll("li");
+      li[0].innerHTML = "Tap the Share button" + " " + share + " " + "in Safari's toolbar.";
+      li[1].textContent = "Choose “Add to Home Screen”.";
+      li[2].textContent = "Tap “Add”.";
+      const ok = d.querySelector("button");
+      ok.textContent = "Got it";
+      ok.addEventListener("click", () => d.close());
+      document.body.appendChild(d);
+    }
+    d.showModal();
+  }
+
+  // Con la app instalada: guardar en segundo plano las librerías de todas las herramientas
+  // para que funcionen sin conexión (unos 8 MB, una sola vez). El OCR y HEIC se guardan al usarlos.
+  if (published && standalone() && "serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      let done = null;
+      try { done = localStorage.getItem("offline-ready"); } catch (e) {}
+      if (done === "v1") return;
+      // Hay que esperar a que el service worker controle la página; si no, lo descargado no se guarda
+      const controlled = navigator.serviceWorker.controller ? Promise.resolve()
+        : new Promise(r => navigator.serviceWorker.addEventListener("controllerchange", r, { once: true }));
+      controlled.then(() => {
+        const v = "/assets/vendor/";
+        const files = ["pdf.min.js", "pdf.worker.min.js", "pdf-lib.min.js", "jszip.min.js", "docx.min.js", "mammoth.browser.min.js",
+          "pdfmake.min.js", "vfs_fonts.js", "html-to-pdfmake.min.js", "xlsx.full.min.js"];
+        const go = () => Promise.all(files.map(f => fetch(v + f).then(r => { if (!r.ok) throw new Error(f); })))
+          .then(() => { try { localStorage.setItem("offline-ready", "v1"); } catch (e) {} })
+          .catch(() => {});
+        if ("requestIdleCallback" in window) requestIdleCallback(go, { timeout: 5000 }); else setTimeout(go, 3000);
+      });
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    if (standalone()) return;
+    installButtons().forEach(b => {
+      if (isIOS() && published) b.hidden = false;   // en iPhone no hay aviso automático: se explica cómo
+      b.addEventListener("click", async () => {
+        if (installEvent) {
+          installEvent.prompt();
+          await installEvent.userChoice;
+          installEvent = null;
+          installButtons().forEach(x => { x.hidden = true; });
+        } else if (isIOS()) {
+          iosHelp();
+        }
+      });
+    });
+  });
+
   // Google AdSense: se carga cuando la página ya está lista y solo si hay un ID real
   window.addEventListener("load", () => {
     const meta = document.querySelector('meta[name="google-adsense-account"]');

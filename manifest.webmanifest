@@ -1,0 +1,95 @@
+{
+ "id": "/",
+ "name": "PDFGratis: herramientas PDF",
+ "short_name": "PDFGratis",
+ "description": "Une, divide, comprime, firma y convierte PDF gratis. Funciona sin conexión y tus archivos no salen de tu dispositivo.",
+ "lang": "es",
+ "start_url": "/",
+ "scope": "/",
+ "display": "standalone",
+ "background_color": "#EDF0F4",
+ "theme_color": "#16213A",
+ "icons": [
+  {
+   "src": "/assets/icons/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png"
+  },
+  {
+   "src": "/assets/icons/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png"
+  },
+  {
+   "src": "/assets/icons/maskable-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ],
+ "shortcuts": [
+  {
+   "name": "Unir PDF",
+   "url": "/unir-pdf",
+   "icons": [
+    {
+     "src": "/assets/icons/icon-96.png",
+     "sizes": "96x96"
+    }
+   ]
+  },
+  {
+   "name": "Comprimir PDF",
+   "url": "/comprimir-pdf",
+   "icons": [
+    {
+     "src": "/assets/icons/icon-96.png",
+     "sizes": "96x96"
+    }
+   ]
+  },
+  {
+   "name": "Firmar PDF",
+   "url": "/firmar-pdf",
+   "icons": [
+    {
+     "src": "/assets/icons/icon-96.png",
+     "sizes": "96x96"
+    }
+   ]
+  },
+  {
+   "name": "Escanear con el móvil",
+   "url": "/escanear-documentos",
+   "icons": [
+    {
+     "src": "/assets/icons/icon-96.png",
+     "sizes": "96x96"
+    }
+   ]
+  }
+ ],
+ "screenshots": [
+  {
+   "src": "/assets/icons/screens/es-narrow-index.png",
+   "sizes": "412x915",
+   "type": "image/png",
+   "form_factor": "narrow",
+   "label": "Todas las herramientas"
+  },
+  {
+   "src": "/assets/icons/screens/es-narrow-unir-pdf.png",
+   "sizes": "412x915",
+   "type": "image/png",
+   "form_factor": "narrow",
+   "label": "Unir PDF"
+  },
+  {
+   "src": "/assets/icons/screens/es-wide-index.png",
+   "sizes": "1280x800",
+   "type": "image/png",
+   "form_factor": "wide",
+   "label": "PDFGratis en el ordenador"
+  }
+ ]
+}
