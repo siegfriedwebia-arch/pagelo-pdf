@@ -30,6 +30,17 @@ assets/js/*.js              Un archivo por herramienta
 assets/vendor/              Librerías incluidas (no dependen de internet)
 ```
 
+## Estadísticas de visitas (Vercel)
+
+La web ya lleva el código de Vercel Web Analytics (gratis y sin cookies).
+Solo tienes que activarlo: en Vercel, abre tu proyecto → **Analytics** → **Enable**,
+y vuelve a publicar la web. En unos días verás visitas, páginas más vistas y países.
+
+## Imágenes para compartir
+
+Cada página tiene su imagen al compartir el enlace (en `assets/og/`), en los dos idiomas.
+Para comprobar cómo se ve, pega un enlace en https://www.opengraph.xyz
+
 ## Direcciones sin «.html»
 
 Las direcciones de la web no llevan «.html» (`/unir-pdf`, `/en/merge-pdf`). El archivo
