@@ -1,6 +1,6 @@
 /* Pagelo — service worker (lo genera pwa.py: no lo edites a mano)
    Guarda la web en el dispositivo para que se pueda instalar y usar sin conexión. */
-const VERSION = "4a2be01afa";
+const VERSION = "828b38d86a";
 const CORE = "core-" + VERSION;       // páginas y código de esta versión
 const VENDOR = "vendor-v1";           // librerías grandes: se guardan la primera vez que se usan
 const CORE_FILES = [
@@ -15,6 +15,7 @@ const CORE_FILES = [
  "/editar-pdf",
  "/eliminar-paginas",
  "/en/",
+ "/en/about",
  "/en/add-page-numbers",
  "/en/add-watermark",
  "/en/compress-images",
@@ -26,6 +27,15 @@ const CORE_FILES = [
  "/en/excel-to-pdf",
  "/en/extract-pdf-pages",
  "/en/fill-pdf-form",
+ "/en/guide-are-online-pdf-tools-safe",
+ "/en/guide-convert-pdf-to-word-and-edit",
+ "/en/guide-merge-pdf-files-into-one",
+ "/en/guide-redact-personal-data-in-a-pdf",
+ "/en/guide-remove-pdf-password",
+ "/en/guide-scan-documents-with-your-phone",
+ "/en/guide-send-large-pdf-by-email",
+ "/en/guide-sign-pdf-on-your-phone",
+ "/en/guides",
  "/en/heic-to-jpg",
  "/en/jpg-to-pdf",
  "/en/legal-notice",
@@ -48,6 +58,15 @@ const CORE_FILES = [
  "/excel-a-pdf",
  "/extraer-paginas",
  "/firmar-pdf",
+ "/guia-enviar-pdf-grande-por-email",
+ "/guia-es-seguro-usar-webs-de-pdf",
+ "/guia-escanear-documentos-con-el-movil",
+ "/guia-firmar-pdf-desde-el-movil",
+ "/guia-ocultar-datos-personales-en-un-pdf",
+ "/guia-pasar-pdf-a-word-y-editarlo",
+ "/guia-quitar-contrasena-pdf",
+ "/guia-unir-varios-pdf-en-uno",
+ "/guias",
  "/heic-a-jpg",
  "/jpg-a-pdf",
  "/marca-de-agua",
@@ -61,6 +80,7 @@ const CORE_FILES = [
  "/redimensionar-imagenes",
  "/rellenar-formulario-pdf",
  "/rotar-pdf",
+ "/sobre-pagelo",
  "/tachar-datos-pdf",
  "/unir-pdf",
  "/word-a-pdf",

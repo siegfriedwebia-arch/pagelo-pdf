@@ -338,3 +338,15 @@ input.form-field[type=checkbox], input.form-field[type=radio] { width: auto; hei
 .ios-help li { margin-bottom: .5rem; }
 .ios-help svg { vertical-align: -3px; color: #0a7aff; }
 .install-promo { margin-top: 1rem; }
+
+/* Guías y páginas de texto */
+.article { max-width: 72ch; padding-bottom: 1rem; }
+.article > p, .article > ol, .article > ul { font-size: 1.08rem; line-height: 1.7; }
+.article h2 { margin-top: 2rem; }
+.article ol, .article ul { padding-left: 1.3rem; }
+.article li { margin-bottom: .55rem; }
+.article .note p { font-size: 1rem; line-height: 1.55; }
+.cta-tool { max-width: 340px; margin: 1.2rem 0 1.6rem; }
+.cta-tool .sheet { min-height: 0; }
+.byline { color: var(--muted); font-size: .95rem; border-top: 1px solid var(--line); padding-top: 1rem; margin-top: 2rem; }
+.guides-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); margin-bottom: 2rem; }
