@@ -31,8 +31,8 @@
 
   async function basic() {
     const doc = await P.openEdit(bytes);
-    doc.setProducer("PDFGratis");
-    doc.setCreator("PDFGratis");
+    doc.setProducer("Pagelo");
+    doc.setCreator("Pagelo");
     return await doc.save({ useObjectStreams: true, addDefaultPage: false });
   }
 

@@ -1,7 +1,7 @@
 {
  "id": "/",
- "name": "PDFGratis: herramientas PDF",
- "short_name": "PDFGratis",
+ "name": "Pagelo: herramientas PDF",
+ "short_name": "Pagelo",
  "description": "Une, divide, comprime, firma y convierte PDF gratis. Funciona sin conexión y tus archivos no salen de tu dispositivo.",
  "lang": "es",
  "start_url": "/",
@@ -89,7 +89,7 @@
    "sizes": "1280x800",
    "type": "image/png",
    "form_factor": "wide",
-   "label": "PDFGratis en el ordenador"
+   "label": "Pagelo en el ordenador"
   }
  ]
 }

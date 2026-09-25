@@ -117,7 +117,7 @@
         styles: { sheet: { fontSize: 13, bold: true, margin: [0, 0, 0, 8] } },
         defaultStyle: { fontSize: 9 },
         footer: (p, n) => ({ text: `${p} / ${n}`, alignment: "center", fontSize: 7, color: "#888", margin: [0, 8, 0, 0] }),
-        info: { title: U.baseName(file.name), producer: "PDFGratis" }
+        info: { title: U.baseName(file.name), producer: "Pagelo" }
       };
       const blob = await new Promise((resolve, reject) => { try { pdfMake.createPdf(def).getBlob(resolve); } catch (e) { reject(e); } });
       P.finish({ title: "PDF listo", detail: `${names.length} ${U.pl(names.length, "hoja", "hojas")} · ${U.formatBytes(blob.size)}`, blob, name: U.baseName(file.name) + ".pdf" });

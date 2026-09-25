@@ -119,7 +119,7 @@
       });
     });
     const doc = new D.Document({
-      creator: "PDFGratis",
+      creator: "Pagelo",
       styles: { default: { document: { run: { font: "Calibri" } } } },
       sections: [{ children }]
     });
@@ -141,7 +141,7 @@
         children: [new D.Paragraph({ children: [new D.ImageRun({ type: "jpg", data, transformation: { width: Math.floor(width * 96 / 72) - 1, height: Math.floor(height * 96 / 72) - 2 } })] })]
       });
     }
-    return await D.Packer.toBlob(new D.Document({ creator: "PDFGratis", sections }));
+    return await D.Packer.toBlob(new D.Document({ creator: "Pagelo", sections }));
   }
 
   btn.addEventListener("click", async () => {

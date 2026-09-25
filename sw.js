@@ -1,9 +1,8 @@
-/* PDFGratis — service worker (lo genera pwa.py: no lo edites a mano)
+/* Pagelo — service worker (lo genera pwa.py: no lo edites a mano)
    Guarda la web en el dispositivo para que se pueda instalar y usar sin conexión. */
-const VERSION = "70e8ffcd61";
+const VERSION = "4a2be01afa";
 const CORE = "core-" + VERSION;       // páginas y código de esta versión
 const VENDOR = "vendor-v1";           // librerías grandes: se guardan la primera vez que se usan
-const FONTS = "fonts-v1";
 const CORE_FILES = [
  "/",
  "/aviso-legal",
@@ -71,6 +70,14 @@ const CORE_FILES = [
  "/assets/icons/icon-192.png",
  "/assets/icons/icon-48.png",
  "/assets/icons/apple-touch-icon.png",
+ "/assets/fonts/caveat-600.woff2",
+ "/assets/fonts/dancing-script-600.woff2",
+ "/assets/fonts/great-vibes-400.woff2",
+ "/assets/fonts/sora-600.woff2",
+ "/assets/fonts/sora-700.woff2",
+ "/assets/fonts/source-sans-3-400.woff2",
+ "/assets/fonts/source-sans-3-600.woff2",
+ "/assets/fonts/source-sans-3-700.woff2",
  "/assets/js/common.js",
  "/assets/js/comprimir-pdf.js",
  "/assets/js/dividir.js",
@@ -172,9 +179,6 @@ self.addEventListener("fetch", event => {
     if (req.mode === "navigate") return event.respondWith(networkFirst(req));
     if (url.pathname.startsWith("/assets/vendor/")) return event.respondWith(cacheFirst(req, VENDOR));
     return event.respondWith(staleWhileRevalidate(req, CORE));
-  }
-  if (url.hostname === "fonts.googleapis.com" || url.hostname === "fonts.gstatic.com") {
-    return event.respondWith(staleWhileRevalidate(req, FONTS));
   }
   // Todo lo demás (anuncios, etc.) va directo a internet
 });

@@ -1,7 +1,18 @@
 /* =========================================================
-   PDFGratis — estilos
+   Pagelo — estilos
    Colores y tipografías en :root. Cambia aquí y se aplica a toda la web.
    ========================================================= */
+
+/* Tipografías alojadas en la propia web (licencia SIL Open Font License) */
+@font-face { font-family: "Sora"; font-weight: 600; font-display: swap; src: url("../fonts/sora-600.woff2") format("woff2"); }
+@font-face { font-family: "Sora"; font-weight: 700; font-display: swap; src: url("../fonts/sora-700.woff2") format("woff2"); }
+@font-face { font-family: "Source Sans 3"; font-weight: 400; font-display: swap; src: url("../fonts/source-sans-3-400.woff2") format("woff2"); }
+@font-face { font-family: "Source Sans 3"; font-weight: 600; font-display: swap; src: url("../fonts/source-sans-3-600.woff2") format("woff2"); }
+@font-face { font-family: "Source Sans 3"; font-weight: 700; font-display: swap; src: url("../fonts/source-sans-3-700.woff2") format("woff2"); }
+/* Tipografías para las firmas escritas (solo se descargan al usarlas) */
+@font-face { font-family: "Caveat"; font-weight: 600; font-display: swap; src: url("../fonts/caveat-600.woff2") format("woff2"); }
+@font-face { font-family: "Dancing Script"; font-weight: 600; font-display: swap; src: url("../fonts/dancing-script-600.woff2") format("woff2"); }
+@font-face { font-family: "Great Vibes"; font-weight: 400; font-display: swap; src: url("../fonts/great-vibes-400.woff2") format("woff2"); }
 
 :root {
   --desk: #EDF0F4;        /* fondo, como una mesa */
@@ -13,15 +24,16 @@
 
   /* Un color por categoría */
   --c-organizar: #2B59C3;
-  --c-optimizar: #D13B2E;
-  --c-convertir: #0C8577;
+  --c-optimizar: #BE3328;
+  --c-convertir: #0A7266;
   --c-seguridad: #6B3FC9;
-  --c-imagen: #B06A00;
+  --c-imagen: #8F5500;
 
   --cat: var(--c-optimizar);
-  --ok: #0C8577;
+  --on-cat: #FFFFFF;        /* texto sobre botones de color */
+  --ok: #0A7266;
   --bad: #C4272B;
-  --warn: #B06A00;
+  --warn: #8F5500;
 
   --font-display: "Sora", "Segoe UI", system-ui, sans-serif;
   --font-body: "Source Sans 3", "Segoe UI", system-ui, -apple-system, sans-serif;
@@ -34,13 +46,13 @@
   :root:not([data-theme="light"]) {
     --desk: #10141D; --paper: #1A1F2B; --ink: #E8ECF3; --muted: #9AA3B5; --line: #2C3342; --soft: #242A38;
     --c-organizar: #6F97FF; --c-optimizar: #FF6B5E; --c-convertir: #2BC2AE; --c-seguridad: #A583FF; --c-imagen: #F2A93B;
-    --ok: #2BC2AE; --bad: #FF6B6B; --warn: #F2A93B; color-scheme: dark;
+    --ok: #2BC2AE; --bad: #FF6B6B; --warn: #F2A93B; --on-cat: #0B0F17; color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --desk: #10141D; --paper: #1A1F2B; --ink: #E8ECF3; --muted: #9AA3B5; --line: #2C3342; --soft: #242A38;
   --c-organizar: #6F97FF; --c-optimizar: #FF6B5E; --c-convertir: #2BC2AE; --c-seguridad: #A583FF; --c-imagen: #F2A93B;
-  --ok: #2BC2AE; --bad: #FF6B6B; --warn: #F2A93B; color-scheme: dark;
+  --ok: #2BC2AE; --bad: #FF6B6B; --warn: #F2A93B; --on-cat: #0B0F17; color-scheme: dark;
 }
 
 [data-cat="organizar"] { --cat: var(--c-organizar); }
@@ -111,7 +123,7 @@ p { margin: 0 0 1em; }
   background: linear-gradient(225deg, transparent 50%, var(--cat) 50%);
 }
 .sheet:hover { box-shadow: inset 0 0 0 2px var(--cat); }
-.sheet .fmt { align-self: flex-start; font-family: var(--font-display); font-weight: 600; font-size: .78rem; letter-spacing: .02em; color: var(--cat); background: color-mix(in srgb, var(--cat) 11%, transparent); padding: .15rem .5rem; border-radius: 5px; margin-bottom: .35rem; }
+.sheet .fmt { align-self: flex-start; font-family: var(--font-display); font-weight: 600; font-size: .78rem; letter-spacing: .02em; color: var(--cat); background: color-mix(in srgb, var(--cat) 9%, var(--paper)); padding: .15rem .5rem; border-radius: 5px; margin-bottom: .35rem; }
 .sheet strong { font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; line-height: 1.25; }
 .sheet .desc { color: var(--muted); font-size: .93rem; line-height: 1.4; }
 .no-results { color: var(--muted); }
@@ -120,7 +132,7 @@ p { margin: 0 0 1em; }
 .tool-head { padding: 1.8rem 0 1.2rem; }
 .back { display: inline-flex; align-items: center; gap: .3rem; color: var(--muted); text-decoration: none; font-weight: 600; font-size: .95rem; margin-bottom: .9rem; }
 .back:hover { color: var(--ink); }
-.tool-head .fmt { display: inline-block; font-family: var(--font-display); font-weight: 600; font-size: .85rem; color: var(--cat); background: color-mix(in srgb, var(--cat) 11%, transparent); padding: .2rem .6rem; border-radius: 6px; margin-bottom: .7rem; }
+.tool-head .fmt { display: inline-block; font-family: var(--font-display); font-weight: 600; font-size: .85rem; color: var(--cat); background: color-mix(in srgb, var(--cat) 9%, var(--paper)); padding: .2rem .6rem; border-radius: 6px; margin-bottom: .7rem; }
 .tool-head h1 { font-size: clamp(1.9rem, 4.5vw, 2.8rem); max-width: 22ch; }
 .tool-head p { color: var(--muted); font-size: 1.12rem; max-width: 62ch; }
 
@@ -137,7 +149,7 @@ p { margin: 0 0 1em; }
   border: 2px dashed color-mix(in srgb, var(--cat) 45%, var(--line));
 }
 .drop:hover, .drop.drag { border-color: var(--cat); background: color-mix(in srgb, var(--cat) 5%, var(--paper)); }
-.drop .pick { display: inline-flex; align-items: center; gap: .5rem; background: var(--cat); color: #fff; font-weight: 700; font-size: 1.1rem; padding: .85rem 1.4rem; border-radius: 10px; margin-bottom: .4rem; }
+.drop .pick { display: inline-flex; align-items: center; gap: .5rem; background: var(--cat); color: var(--on-cat); font-weight: 700; font-size: 1.1rem; padding: .85rem 1.4rem; border-radius: 10px; margin-bottom: .4rem; }
 .drop span { color: var(--muted); }
 .drop input { position: absolute; width: 1px; height: 1px; opacity: 0; }
 .drop.compact { padding: 1.2rem 1rem; }
@@ -164,15 +176,16 @@ input[type="color"] { width: 46px; height: 40px; padding: 2px; border: 1px solid
 .option { display: flex; gap: .7rem; align-items: flex-start; padding: .75rem .85rem; border: 1px solid var(--line); border-radius: 10px; cursor: pointer; }
 .option:has(input:checked) { border-color: var(--cat); background: color-mix(in srgb, var(--cat) 7%, var(--paper)); }
 .option input { margin-top: .2rem; flex: none; }
+.option .opt { display: block; }
 .option b { display: block; }
-.option span { color: var(--muted); font-size: .92rem; line-height: 1.35; display: block; }
+.option small { color: var(--muted); font-size: .92rem; line-height: 1.35; display: block; }
 
 .seg { display: flex; flex-wrap: wrap; gap: .35rem; margin-bottom: 1rem; }
 .seg button { font: inherit; font-weight: 600; font-size: .93rem; padding: .45rem .85rem; border-radius: 8px; border: 1px solid var(--line); background: var(--paper); color: var(--muted); cursor: pointer; }
-.seg button[aria-pressed="true"] { background: var(--cat); border-color: var(--cat); color: #fff; }
+.seg button[aria-pressed="true"] { background: var(--cat); border-color: var(--cat); color: var(--on-cat); }
 
 /* Botones */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: .45rem; font: inherit; font-weight: 700; line-height: 1.2; padding: .75rem 1.2rem; border-radius: 10px; border: 2px solid var(--cat); background: var(--cat); color: #fff; cursor: pointer; text-decoration: none; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: .45rem; font: inherit; font-weight: 700; line-height: 1.2; padding: .75rem 1.2rem; border-radius: 10px; border: 2px solid var(--cat); background: var(--cat); color: var(--on-cat); cursor: pointer; text-decoration: none; }
 .btn:hover { filter: brightness(1.08); }
 .btn:disabled { opacity: .45; cursor: not-allowed; filter: none; }
 .btn.ghost { background: transparent; color: var(--ink); border-color: var(--line); }
@@ -203,7 +216,7 @@ input[type="color"] { width: 46px; height: 40px; padding: 2px; border: 1px solid
 .pg.selected .thumb { outline: 3px solid var(--cat); outline-offset: 1px; }
 .pg.removed .thumb { opacity: .35; }
 .pg.removed .thumb::after { content: "✕"; position: absolute; top: 38%; left: 50%; transform: translate(-50%, -50%); font-size: 2.6rem; color: var(--bad); font-weight: 700; }
-.pg .badge { position: absolute; top: 6px; right: 6px; width: 26px; height: 26px; border-radius: 50%; background: var(--cat); color: #fff; font-size: .85rem; display: none; place-items: center; font-weight: 700; }
+.pg .badge { position: absolute; top: 6px; right: 6px; width: 26px; height: 26px; border-radius: 50%; background: var(--cat); color: var(--on-cat); font-size: .85rem; display: none; place-items: center; font-weight: 700; }
 .pg.selected .badge { display: grid; }
 .pg .rot { position: absolute; top: 6px; left: 6px; }
 
@@ -227,7 +240,7 @@ input[type="color"] { width: 46px; height: 40px; padding: 2px; border: 1px solid
 .viewer-nav { display: flex; align-items: center; justify-content: center; gap: .8rem; margin-top: .8rem; color: var(--muted); }
 .placed { position: absolute; border: 2px dashed var(--cat); cursor: move; touch-action: none; }
 .placed img { width: 100%; height: 100%; display: block; pointer-events: none; }
-.placed .del, .placed .size { position: absolute; width: 26px; height: 26px; border-radius: 50%; background: var(--cat); color: #fff; border: 2px solid #fff; display: grid; place-items: center; font-size: .8rem; cursor: pointer; padding: 0; }
+.placed .del, .placed .size { position: absolute; width: 26px; height: 26px; border-radius: 50%; background: var(--cat); color: var(--on-cat); border: 2px solid #fff; display: grid; place-items: center; font-size: .8rem; cursor: pointer; padding: 0; }
 .placed .del { top: -13px; right: -13px; }
 .placed .size { bottom: -13px; right: -13px; cursor: nwse-resize; }
 
@@ -315,7 +328,7 @@ input.form-field[type=checkbox], input.form-field[type=radio] { width: auto; hei
 .lang-bar button { background: none; border: 0; color: var(--paper); font-size: 1.1rem; cursor: pointer; opacity: .7; }
 
 /* Botón «Instalar app» y ayuda para iPhone */
-.install-btn { display: inline-flex; align-items: center; gap: .35rem; font: inherit; font-weight: 700; font-size: .88rem; padding: .4rem .7rem; border-radius: 8px; border: 1px solid var(--c-optimizar); background: var(--c-optimizar); color: #fff; cursor: pointer; }
+.install-btn { display: inline-flex; align-items: center; gap: .35rem; font: inherit; font-weight: 700; font-size: .88rem; padding: .4rem .7rem; border-radius: 8px; border: 1px solid var(--c-optimizar); background: var(--c-optimizar); color: var(--on-cat); cursor: pointer; }
 .install-btn:hover { filter: brightness(1.08); }
 @media (max-width: 800px) { .install-btn { margin: .3rem 0; justify-content: center; } }
 .ios-help { border: 0; border-radius: 16px; padding: 1.4rem; max-width: 340px; width: calc(100% - 2rem); background: var(--paper); color: var(--ink); box-shadow: 0 10px 40px rgba(0,0,0,.35); }

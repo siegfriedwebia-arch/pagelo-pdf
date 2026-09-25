@@ -1,7 +1,7 @@
 {
  "id": "/en/",
- "name": "PDFGratis: PDF tools",
- "short_name": "PDFGratis",
+ "name": "Pagelo: PDF tools",
+ "short_name": "Pagelo",
  "description": "Merge, split, compress, sign and convert PDFs for free. Works offline and your files never leave your device.",
  "lang": "en",
  "start_url": "/en/",
@@ -89,7 +89,7 @@
    "sizes": "1280x800",
    "type": "image/png",
    "form_factor": "wide",
-   "label": "PDFGratis on desktop"
+   "label": "Pagelo on desktop"
   }
  ]
 }

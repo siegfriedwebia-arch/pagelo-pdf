@@ -1,4 +1,4 @@
-/* PDFGratis — funciones comunes a todas las páginas */
+/* Pagelo — funciones comunes a todas las páginas */
 (function () {
   "use strict";
   const root = document.documentElement;
@@ -226,7 +226,7 @@
       d.className = "ios-help";
       const share = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3M8 7l4-4 4 4"/><path d="M6 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2h-1"/></svg>';
       d.innerHTML = "<h2></h2><ol><li></li><li></li><li></li></ol><button class='btn' type='button'></button>";
-      d.querySelector("h2").textContent = "Instalar PDFGratis en el iPhone";
+      d.querySelector("h2").textContent = "Instalar Pagelo en el iPhone";
       const li = d.querySelectorAll("li");
       li[0].innerHTML = "Pulsa el botón Compartir" + " " + share + " " + "en la barra de Safari.";
       li[1].textContent = "Elige «Añadir a pantalla de inicio».";

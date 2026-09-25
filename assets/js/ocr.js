@@ -96,7 +96,7 @@
         status.textContent = `Leyendo página ${i + 1} de ${pageCount}…`;
         const { canvas, dpi } = await pageImage(i);
         await worker.setParameters({ user_defined_dpi: String(dpi) });
-        const { data } = await worker.recognize(canvas, { pdfTitle: "PDFGratis OCR", pdfTextOnly: true }, { text: true, pdf: wantPdf });
+        const { data } = await worker.recognize(canvas, { pdfTitle: "Pagelo OCR", pdfTextOnly: true }, { text: true, pdf: wantPdf });
         texts.push(data.text.trim());
 
         if (wantPdf) {

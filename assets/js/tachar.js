@@ -184,7 +184,7 @@
         canvas.width = canvas.height = 0;
       }
       // Sin metadatos del documento original (autor, título, programa…)
-      out.setTitle(""); out.setAuthor(""); out.setSubject(""); out.setKeywords([]); out.setCreator("PDFGratis"); out.setProducer("PDFGratis");
+      out.setTitle(""); out.setAuthor(""); out.setSubject(""); out.setKeywords([]); out.setCreator("Pagelo"); out.setProducer("Pagelo");
       const res = await P.save(out);
       P.finish({
         title: "Datos tachados",

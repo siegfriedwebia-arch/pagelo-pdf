@@ -1,4 +1,4 @@
-/* PDFGratis — utilidades PDF compartidas.
+/* Pagelo — utilidades PDF compartidas.
    Usa pdf-lib (editar) y pdf.js (ver y dibujar páginas). Todo ocurre en el navegador. */
 (function () {
   "use strict";
@@ -48,7 +48,7 @@
      y se borra en cuanto la siguiente herramienta lo recoge. */
   function idb() {
     return new Promise((ok, ko) => {
-      const r = indexedDB.open("pdfgratis", 1);
+      const r = indexedDB.open("pagelo", 1);
       r.onupgradeneeded = () => r.result.createObjectStore("handoff");
       r.onsuccess = () => ok(r.result);
       r.onerror = () => ko(r.error);
@@ -304,7 +304,7 @@
       done.querySelector("#done-dl").download = name;
       done.querySelector("#done-dl").textContent = "Descargar " + (name.endsWith(".zip") ? "ZIP" : name.split(".").pop().toUpperCase());
       done.querySelector("#done-again").addEventListener("click", () => location.reload());
-      const next = U.$("#next");
+      const next = U.$("#next-tools");
       if (next && /\.pdf$/i.test(name)) {
         next.hidden = false;
         U.$$("a.sheet", next).forEach(a => a.addEventListener("click", async e => {

@@ -1,4 +1,4 @@
-# PDFGratis — herramientas PDF gratis
+# Pagelo — herramientas PDF gratis
 
 Web 100 % estática (HTML, CSS y JavaScript). No necesita servidor ni base de datos:
 todos los documentos se procesan en el navegador del visitante y nunca se suben a internet.
@@ -49,6 +49,11 @@ y vuelve a publicar la web. En unos días verás visitas, páginas más vistas y
 Cada página tiene su imagen al compartir el enlace (en `assets/og/`), en los dos idiomas.
 Para comprobar cómo se ve, pega un enlace en https://www.opengraph.xyz
 
+## Seguridad
+
+`vercel.json` añade cabeceras de seguridad estándar (evitan que la web se incruste en páginas ajenas
+y que el navegador malinterprete archivos) y controla la caché de la app.
+
 ## Direcciones sin «.html»
 
 Las direcciones de la web no llevan «.html» (`/unir-pdf`, `/en/merge-pdf`). El archivo
@@ -60,7 +65,7 @@ Al abrir la web en tu ordenador (doble clic o Live Server) los enlaces siguen fu
 
 Con **Buscar y reemplazar en todos los archivos** (Ctrl+Shift+H):
 
-- `https://pdf-gratis.vercel.app` → tu dominio, cuando lo compres (todas las páginas, sitemap.xml y robots.txt).
+- `https://pagelopdf.com` → tu dominio (todas las páginas, sitemap.xml y robots.txt).
 - El correo de contacto (siegfriedwebia@gmail.com) está en `contacto.html`, `privacidad.html` y `aviso-legal.html`.
 - Rellena los datos entre corchetes `[ ]` de `privacidad.html` y `aviso-legal.html`.
 
@@ -121,3 +126,5 @@ Todas permiten uso comercial gratuito:
 pdf-lib (@cantoo/pdf-lib) — MIT · pdf.js — Apache 2.0 · docx — MIT · mammoth — BSD-2 ·
 pdfmake — MIT · html-to-pdfmake — MIT · JSZip — MIT · Tesseract.js — Apache 2.0 ·
 SheetJS (xlsx) — Apache 2.0 · heic-to — LGPL-3.0 (se usa sin modificar, como archivo aparte).
+Tipografías (assets/fonts): Sora, Source Sans 3, Caveat, Dancing Script y Great Vibes — SIL Open Font License 1.1.
+Se alojan en la propia web: no se conecta con Google Fonts.

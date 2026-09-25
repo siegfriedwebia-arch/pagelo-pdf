@@ -60,7 +60,7 @@
         pageMargins: [margin, margin, margin, margin],
         content,
         defaultStyle: { fontSize: 11, lineHeight: 1.25 },
-        info: { title: U.baseName(file.name), producer: "PDFGratis" }
+        info: { title: U.baseName(file.name), producer: "Pagelo" }
       };
       const blob = await new Promise((resolve, reject) => {
         try { pdfMake.createPdf(def).getBlob(resolve); } catch (e) { reject(e); }
