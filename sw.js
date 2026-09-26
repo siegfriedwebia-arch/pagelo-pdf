@@ -1,6 +1,6 @@
 /* Pagelo — service worker (lo genera pwa.py: no lo edites a mano)
    Guarda la web en el dispositivo para que se pueda instalar y usar sin conexión. */
-const VERSION = "828b38d86a";
+const VERSION = "e68d55824c";
 const CORE = "core-" + VERSION;       // páginas y código de esta versión
 const VENDOR = "vendor-v1";           // librerías grandes: se guardan la primera vez que se usan
 const CORE_FILES = [

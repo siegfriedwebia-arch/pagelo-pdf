@@ -30,6 +30,24 @@ assets/js/*.js              Un archivo por herramienta
 assets/vendor/              Librerías incluidas (no dependen de internet)
 ```
 
+## Logo
+
+En `assets/brand/` tienes el logo en todos los formatos:
+- `pagelo-logo.svg` / `.png`: logo completo (símbolo + nombre) para fondos claros.
+- `pagelo-logo-blanco.svg` / `.png`: para fondos oscuros.
+- `pagelo-icono-app.svg` / `pagelo-icono-app-1024.png`: icono cuadrado (redes sociales, directorios, tiendas).
+- `pagelo-simbolo.svg` / `pagelo-simbolo-blanco.svg`: solo el símbolo.
+Colores: azul tinta #16213A, rojo #BE3328. Tipografía del nombre: Sora Bold.
+
+## Logo
+
+En `assets/brand/` tienes el logo en varios formatos:
+- `pagelo-logo.svg` / `.png`: símbolo + nombre (para fondos claros).
+- `pagelo-logo-blanco.svg` / `.png`: versión blanca (para fondos oscuros).
+- `pagelo-simbolo.svg`, `pagelo-simbolo-blanco.svg`, `pagelo-simbolo-1024.png`: solo el símbolo.
+- `pagelo-icono-app.svg` / `pagelo-icono-app-1024.png`: el icono cuadrado (redes sociales, directorios).
+Los SVG se pueden ampliar a cualquier tamaño sin perder calidad.
+
 ## App instalable (PWA)
 
 La web se puede instalar como app en el móvil y el ordenador, y funciona sin conexión:
