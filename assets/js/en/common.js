@@ -66,6 +66,7 @@
 
     // «Configuración de privacidad y cookies»: vuelve a abrir el aviso de consentimiento de Google
     U.$$(".cookie-settings").forEach(a => a.addEventListener("click", e => {
+      if (window.PageloConsent) { e.preventDefault(); window.PageloConsent.open(); return; }
       if (window.googlefc && googlefc.callbackQueue && googlefc.showRevocationMessage) {
         e.preventDefault();
         googlefc.callbackQueue.push(googlefc.showRevocationMessage);
@@ -276,6 +277,69 @@
         }
       });
     });
+  });
+
+  // ---------- Google Analytics con consentimiento ----------
+  // Solo se carga si el visitante lo acepta en el aviso de cookies (Rechazar es igual de fácil que Aceptar).
+  const gaMeta = document.querySelector('meta[name="ga-id"]');
+  const GA = gaMeta && /^G-[A-Z0-9]+$/.test(gaMeta.content) ? gaMeta.content : null;
+  const CONSENT_KEY = "cookie-consent";
+  const CONSENT_DAYS = 365;   // se vuelve a preguntar pasado un año
+
+  function readConsent() {
+    try {
+      const c = JSON.parse(localStorage.getItem(CONSENT_KEY) || "null");
+      if (c && Date.now() - c.t < CONSENT_DAYS * 864e5) return c;
+    } catch (e) {}
+    return null;
+  }
+  function saveConsent(analytics) {
+    try { localStorage.setItem(CONSENT_KEY, JSON.stringify({ analytics, t: Date.now() })); } catch (e) {}
+  }
+  function loadGA() {
+    if (!GA || window.__gaLoaded) return;
+    window.__gaLoaded = true;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { dataLayer.push(arguments); };
+    gtag("consent", "default", { analytics_storage: "granted", ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied" });
+    gtag("js", new Date());
+    gtag("config", GA);
+    const s = document.createElement("script");
+    s.async = true;
+    s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA;
+    document.head.appendChild(s);
+  }
+  function removeGACookies() {
+    const host = location.hostname.replace(/^www\./, "");
+    document.cookie.split(";").map(c => c.trim().split("=")[0]).filter(n => /^_ga/.test(n)).forEach(n => {
+      ["", "; domain=" + host, "; domain=." + host].forEach(d => { document.cookie = n + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/" + d; });
+    });
+  }
+  const PageloConsent = {
+    open(focus = true) {
+      const box = document.getElementById("consent");
+      if (!box) return;
+      box.hidden = false;
+      const first = box.querySelector("button");
+      if (focus && first) first.focus();   // solo si lo abre el visitante, no al cargar la página
+    },
+    set(analytics) {
+      const before = readConsent();
+      saveConsent(analytics);
+      const box = document.getElementById("consent");
+      if (box) box.hidden = true;
+      if (analytics) loadGA();
+      else if (window.__gaLoaded || (before && before.analytics)) { removeGACookies(); location.reload(); }
+    }
+  };
+  if (GA && published) window.PageloConsent = PageloConsent;
+
+  document.addEventListener("DOMContentLoaded", () => {
+    if (!GA || !published) return;
+    U.$$("[data-consent]").forEach(b => b.addEventListener("click", () => PageloConsent.set(b.dataset.consent === "yes")));
+    const c = readConsent();
+    if (c) { if (c.analytics) loadGA(); }
+    else PageloConsent.open(false);
   });
 
   // Google AdSense: se carga cuando la página ya está lista y solo si hay un ID real

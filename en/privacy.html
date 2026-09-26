@@ -31,6 +31,7 @@
 <!-- Google AdSense: verificación de la cuenta. El código de anuncios (y el aviso de cookies)
        se carga desde assets/js/common.js cuando la página ya se ha mostrado. -->
 <meta content="ca-pub-XXXXXXXXXXXXXXXX" name="google-adsense-account">
+<meta content="G-E826783TB7" name="ga-id">
 </head>
 <body>
 <header class="site-header">
@@ -59,7 +60,16 @@
 <p>All Pagelo tools run inside your browser. The PDFs, Word documents and images you use are not sent to any server, not stored, and nobody else can see them, not even us. When you close the page, they're cleared from memory.</p>
 <h2>What data is processed</h2>
 <p>We don't require sign-up or collect your name, email or other personal data, unless you choose to write to our contact address. In that case we'll only use your message to reply to you.</p>
-<h2 id="cookies">Cookies and advertising</h2>
+<h2 id="cookies">Analytics cookies (Google Analytics)</h2>
+<p>If you accept it in the cookie notice, we use Google Analytics, a service provided by Google Ireland Limited, to know how many people visit the website, which pages and tools they use and from which country, so we can improve it. If you don't accept it, Google Analytics isn't loaded and your browser doesn't connect to Google for this.</p>
+<p>Google Analytics stores these cookies in your browser:</p>
+<ul>
+<li>_ga: distinguishes visitors anonymously. Lasts 2 years.</li>
+<li>_ga_E826783TB7: stores the session state. Lasts 2 years.</li>
+</ul>
+<p>Google may process this data on servers outside the European Union, under the safeguards of the EU-US Data Privacy Framework. The content of your documents is never sent.</p>
+<p>You can accept, reject or withdraw your consent at any time with the button below or the &ldquo;Privacy and cookie settings&rdquo; link in the footer.</p>
+<h2>Cookies and advertising</h2>
 <p>This website is free thanks to advertising from <b>Google AdSense</b>. Google and its partners may use cookies and identifiers to show ads, limit how often you see the same ad, measure performance and, if you agree, show you personalized ads based on your interests.</p>
 <p>If you visit from the European Economic Area, the United Kingdom or Switzerland, you'll be asked for consent before these cookies are used, through Google's consent platform, certified under the IAB TCF framework. If you don't agree, non-personalized ads may be shown.</p>
 <p>You can change your choice at any time:</p>
@@ -75,10 +85,19 @@
 <p>You can request access to, correction or deletion of your data by writing to <a href="/en/contact">siegfriedwebia@gmail.com</a>. If you believe we haven't handled your request properly, you can file a complaint with the Spanish Data Protection Agency (<a href="https://www.aepd.es" rel="noopener" target="_blank">aepd.es</a>).</p>
 <script>
 document.getElementById("revoke").addEventListener("click", function () {
-  if (window.googlefc && googlefc.callbackQueue) { googlefc.callbackQueue.push(googlefc.showRevocationMessage); }
+  if (window.PageloConsent) { window.PageloConsent.open(); }
+  else if (window.googlefc && googlefc.callbackQueue) { googlefc.callbackQueue.push(googlefc.showRevocationMessage); }
   else { document.getElementById("revoke-help").hidden = false; }
 });
 </script></section></div></main>
+<div aria-label="Cookies" class="consent" hidden id="consent" role="region">
+<p>We use Google Analytics cookies to understand how the website is used and improve it. They're only enabled if you accept them. Your documents are never sent anywhere.</p>
+<p class="consent-links"><a href="/en/privacy#cookies">More about cookies</a></p>
+<div class="consent-btns">
+<button class="btn ghost" data-consent="no" type="button">Reject</button>
+<button class="btn ghost" data-consent="yes" type="button">Accept</button>
+</div>
+</div>
 <footer class="site-footer">
 <div class="wrap">
 <p>&copy; 2026 Pagelo. Your files are processed in your browser and are never uploaded to the internet.</p>

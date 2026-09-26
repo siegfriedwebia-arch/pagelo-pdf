@@ -30,6 +30,7 @@
   <!-- Google AdSense: verificación de la cuenta. El código de anuncios (y el aviso de cookies)
        se carga desde assets/js/common.js cuando la página ya se ha mostrado. -->
   <meta name="google-adsense-account" content="ca-pub-XXXXXXXXXXXXXXXX">
+  <meta name="ga-id" content="G-E826783TB7">
 </head>
 <body>
 <header class="site-header">
@@ -62,7 +63,17 @@
 <h2>Qué datos se tratan</h2>
 <p>No pedimos registro ni recogemos tu nombre, email u otros datos personales, salvo que nos escribas voluntariamente al correo de contacto. En ese caso solo usaremos tu mensaje para responderte.</p>
 
-<h2 id="cookies">Cookies y publicidad</h2>
+<h2 id="cookies">Cookies de estadísticas (Google Analytics)</h2>
+<p>Si lo aceptas en el aviso de cookies, usamos Google Analytics, un servicio de Google Ireland Limited, para saber cuántas personas visitan la web, qué páginas y herramientas usan y desde qué país, y así mejorarla. Si no lo aceptas, Google Analytics no se carga y tu navegador no se conecta con Google para esto.</p>
+<p>Google Analytics guarda estas cookies en tu navegador:</p>
+<ul>
+<li>_ga: distingue visitantes de forma anónima. Dura 2 años.</li>
+<li>_ga_E826783TB7: guarda el estado de la visita. Dura 2 años.</li>
+</ul>
+<p>Google puede tratar estos datos en servidores fuera de la Unión Europea, con las garantías del Marco de Privacidad de Datos UE-EE. UU. Nunca se envía el contenido de tus documentos.</p>
+<p>Puedes aceptar, rechazar o retirar tu consentimiento cuando quieras con el botón de más abajo o con el enlace «Configuración de privacidad y cookies» del pie de página.</p>
+
+<h2>Cookies y publicidad</h2>
 <p>Esta web es gratuita gracias a la publicidad de <b>Google AdSense</b>. Google y sus socios pueden usar cookies e identificadores para mostrar anuncios, limitar cuántas veces ves el mismo anuncio, medir su rendimiento y, si lo aceptas, mostrarte anuncios personalizados según tus intereses.</p>
 <p>Si visitas la web desde el Espacio Económico Europeo, Reino Unido o Suiza, antes de usar estas cookies se te pedirá tu consentimiento mediante la plataforma de consentimiento de Google, certificada según el marco IAB TCF. Si no aceptas, podrán mostrarse anuncios no personalizados.</p>
 <p>Puedes cambiar tu elección cuando quieras:</p>
@@ -82,10 +93,19 @@
 <p>Puedes solicitar el acceso, rectificación o supresión de tus datos escribiendo a <a href="/contacto">siegfriedwebia@gmail.com</a>. Si crees que no hemos atendido bien tu solicitud, puedes reclamar ante la Agencia Española de Protección de Datos (<a href="https://www.aepd.es" rel="noopener" target="_blank">aepd.es</a>).</p>
 <script>
 document.getElementById("revoke").addEventListener("click", function () {
-  if (window.googlefc && googlefc.callbackQueue) { googlefc.callbackQueue.push(googlefc.showRevocationMessage); }
+  if (window.PageloConsent) { window.PageloConsent.open(); }
+  else if (window.googlefc && googlefc.callbackQueue) { googlefc.callbackQueue.push(googlefc.showRevocationMessage); }
   else { document.getElementById("revoke-help").hidden = false; }
 });
 </script></section></div></main>
+<div class="consent" id="consent" role="region" aria-label="Cookies" hidden>
+  <p>Usamos cookies de Google Analytics para saber cómo se usa la web y mejorarla. Solo se activan si las aceptas. Tus documentos nunca se envían a ningún sitio.</p>
+  <p class="consent-links"><a href="/privacidad#cookies">Más información sobre las cookies</a></p>
+  <div class="consent-btns">
+    <button class="btn ghost" type="button" data-consent="no">Rechazar</button>
+    <button class="btn ghost" type="button" data-consent="yes">Aceptar</button>
+  </div>
+</div>
 <footer class="site-footer">
   <div class="wrap">
     <p>© 2026 Pagelo. Tus archivos se procesan en tu navegador y nunca se suben a internet.</p>

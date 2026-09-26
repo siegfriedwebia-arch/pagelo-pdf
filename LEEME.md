@@ -56,6 +56,14 @@ La web se puede instalar como app en el móvil y el ordenador, y funciona sin co
 - `assets/icons/`: iconos de la app y capturas para el instalador.
 Solo funciona en la web publicada con https (Vercel), no abriendo los archivos con doble clic.
 
+## Google Analytics y aviso de cookies
+
+La web usa Google Analytics (ID `G-E826783TB7`) **solo si el visitante lo acepta** en el aviso
+de cookies que aparece abajo. «Rechazar» es igual de visible que «Aceptar», y el visitante
+puede cambiar de opinión desde «Configuración de privacidad y cookies», en el pie de página.
+La elección se recuerda un año. Si algún día cambias de ID, búscalo con Ctrl+Shift+H y
+reemplázalo (también aparece en la política de privacidad, en el nombre de la cookie).
+
 ## Estadísticas de visitas (Vercel)
 
 La web ya lleva el código de Vercel Web Analytics (gratis y sin cookies).
