@@ -144,8 +144,26 @@ const CORE_FILES = [
  "/assets/js/en/word-a-pdf.js"
 ];
 
+// Safari no muestra sin conexión una página guardada que llegó tras una redirección:
+// se guarda siempre una copia «limpia» de la respuesta.
+async function clean(res) {
+  if (!res.redirected) return res;
+  const body = await res.blob();
+  return new Response(body, { status: res.status, statusText: res.statusText, headers: res.headers });
+}
+
+// Se guarda cada archivo por separado: si uno falla, los demás se guardan igual
 self.addEventListener("install", event => {
-  event.waitUntil(caches.open(CORE).then(c => c.addAll(CORE_FILES)).then(() => self.skipWaiting()));
+  event.waitUntil((async () => {
+    const cache = await caches.open(CORE);
+    await Promise.all(CORE_FILES.map(async url => {
+      try {
+        const res = await fetch(url, { cache: "reload" });
+        if (res.ok) await cache.put(url, await clean(res));
+      } catch (e) { /* se reintentará al visitar la página */ }
+    }));
+    await self.skipWaiting();
+  })());
 });
 
 self.addEventListener("activate", event => {
@@ -161,13 +179,18 @@ async function networkFirst(request) {
   const cache = await caches.open(CORE);
   try {
     const res = await fetch(request);
-    if (res.ok) cache.put(request, res.clone());
+    if (res.ok && res.type !== "opaqueredirect") cache.put(request.url.split("?")[0], await clean(res.clone()));
     return res;
   } catch (e) {
-    const hit = await cache.match(request, { ignoreSearch: true }) || await caches.match(request, { ignoreSearch: true });
-    if (hit) return hit;
-    const en = new URL(request.url).pathname.startsWith("/en/");
-    return (await cache.match(en ? "/en/" : "/")) || Response.error();
+    // Sin conexión: la página guardada, probando con y sin «/» final
+    const url = new URL(request.url);
+    const path = url.pathname;
+    const tries = [path, path.endsWith("/") ? path.slice(0, -1) : path + "/"];
+    for (const t of tries) {
+      const hit = await cache.match(t) || await caches.match(t);
+      if (hit) return hit;
+    }
+    return (await cache.match(path.startsWith("/en") ? "/en/" : "/")) || Response.error();
   }
 }
 
