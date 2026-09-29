@@ -360,3 +360,4 @@ input.form-field[type=checkbox], input.form-field[type=radio] { width: auto; hei
 .consent-btns { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
 .consent-btns .btn { width: 100%; }
 @media (max-width: 560px) { .consent { left: .6rem; right: .6rem; bottom: .6rem; } }
+.variants { margin-top: 1.4rem; line-height: 1.8; }
