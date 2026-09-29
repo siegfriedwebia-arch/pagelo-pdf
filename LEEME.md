@@ -114,11 +114,9 @@ desde `assets/js/common.js` cuando la página ya se ha mostrado, para no ralenti
 la política de cookies y el enlace «Configuración de privacidad y cookies» en el pie.
 Solo falta poner tu ID de editor:
 
-1. Regístrate en adsense.google.com y añade tu dominio.
-2. Copia tu ID de editor (empieza por `ca-pub-` seguido de 16 números).
-3. En VS Code, Ctrl+Shift+H: busca `XXXXXXXXXXXXXXXX` y reemplázalo por tus 16 números.
-   Así se actualizan a la vez todas las páginas y `ads.txt`.
-4. Publica los cambios y en AdSense pulsa «Verificar».
+Tu ID de editor (`ca-pub-8888754053179200`) ya está en todas las páginas (metaetiqueta de
+verificación) y en `ads.txt`. **Los anuncios están desactivados** hasta que AdSense apruebe la web:
+para activarlos, en el generador pon `ADS_ON = True` en `build.py` y ejecuta `python build.py`.
 
 Aviso de cookies (obligatorio para anuncios en Europa):
 en AdSense → **Privacidad y mensajes** → **Normativas europeas** → Crear mensaje.

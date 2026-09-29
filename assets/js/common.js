@@ -346,7 +346,8 @@
   window.addEventListener("load", () => {
     const meta = document.querySelector('meta[name="google-adsense-account"]');
     const id = meta && meta.content;
-    if (!id || /X/.test(id)) return;
+    // Los anuncios solo se cargan cuando se activan en build.py (ADS_ON = True), tras la aprobación de AdSense
+    if (!id || /X/.test(id) || !document.querySelector('meta[name="pagelo-ads"][content="on"]')) return;
     const go = () => {
       const s = document.createElement("script");
       s.async = true;
